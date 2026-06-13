@@ -185,7 +185,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--bg-brand);
+    background: radial-gradient(ellipse at 50% 38%, #fdf7ef 0%, var(--bg-brand) 48%, var(--bg-secondary) 100%);
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
 }
 
@@ -211,28 +211,47 @@ a {
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 500px;
-    padding: 3rem 2rem;
-    background-color: rgba(248, 239, 225, 0.95);
-    backdrop-filter: blur(8px);
-    border: 1px solid var(--color-text);
+    max-width: 560px;
+    padding: 3.5rem 3.5rem;
+    background-color: rgba(253, 247, 239, 0.96);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(88, 70, 56, 0.35);
     text-align: center;
-    box-shadow: 0 20px 50px rgba(88, 70, 56, 0.15);
+    box-shadow: 0 24px 64px rgba(88, 70, 56, 0.12), 0 2px 8px rgba(88, 70, 56, 0.06);
 }
 
 .splash-logo-container {
-    margin-bottom: 2.5rem;
+    height: 100px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 0;
 }
 
 .splash-logo {
-    max-width: 280px;
-    height: auto;
+    height: 200px;
+    width: auto;
+    max-width: none;
+    margin-top: -50px;
+    display: block;
+    filter: contrast(1.1) brightness(0.92);
 }
 
 .splash-box {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.splash-box::before {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 1px;
+    background-color: var(--border-color-strong);
+    opacity: 0.3;
+    margin: 1.75rem auto 1.75rem;
 }
 
 .splash-heading {
@@ -246,8 +265,7 @@ a {
 .select-wrapper {
     position: relative;
     width: 100%;
-    max-width: 320px;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .select-wrapper select {
@@ -270,22 +288,21 @@ a {
 }
 
 .select-wrapper::after {
-    content: '\f078';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
+    content: '';
     position: absolute;
     right: 1.25rem;
     top: 50%;
-    transform: translateY(-50%);
-    color: var(--color-text);
+    transform: translateY(-75%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid var(--color-text);
+    border-bottom: 1.5px solid var(--color-text);
     pointer-events: none;
-    font-size: 0.8rem;
 }
 
 .btn-enter {
     width: 100%;
-    max-width: 320px;
-    padding: 1rem;
+    padding: 1.1rem;
     font-family: var(--font-mono);
     font-size: 0.85rem;
     letter-spacing: 0.15em;
