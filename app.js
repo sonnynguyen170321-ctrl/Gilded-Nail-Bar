@@ -253,6 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initReviewsSystem();
     initBookingsManager();
     initPrivateEventsModal();
+    initMobileBookCta();
     initFooterAccordions();
     initScrollReveal();
 });
@@ -1038,7 +1039,28 @@ function initPrivateEventsModal() {
 }
 
 // ==========================================================================
-// 8. Footer Accordions for Mobile View
+// 8. Mobile Sticky Book CTA
+// ==========================================================================
+function initMobileBookCta() {
+    const cta = document.getElementById('mobile-book-cta');
+    if (!cta) return;
+
+    const bookingSection = document.getElementById('booking');
+
+    window.addEventListener('scroll', () => {
+        if (!bookingSection) return;
+        const rect = bookingSection.getBoundingClientRect();
+        const inBooking = rect.top < window.innerHeight && rect.bottom > 80;
+        if (inBooking) {
+            cta.classList.add('hidden');
+        } else {
+            cta.classList.remove('hidden');
+        }
+    }, { passive: true });
+}
+
+// ==========================================================================
+// 9. Footer Accordions for Mobile View
 // ==========================================================================
 function initFooterAccordions() {
     const accordionBtns = document.querySelectorAll('.footer-accordion-btn');
@@ -1062,7 +1084,7 @@ function initFooterAccordions() {
 }
 
 // ==========================================================================
-// 9. Scroll Reveal Animations (Intersection Observer)
+// 10. Scroll Reveal Animations (Intersection Observer)
 // ==========================================================================
 function initScrollReveal() {
     const observerOptions = {

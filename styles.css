@@ -1862,4 +1862,336 @@ section {
         from { opacity: 0; transform: translateY(-5px); }
         to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Correct nav dropdown position for larger logo */
+    .nav-menu {
+        top: 96px;
+    }
+
+    /* Shrink logo on tablets */
+    .header-logo-img {
+        max-height: 65px;
+    }
+
+    /* Tighter section padding */
+    section {
+        padding: 4.5rem 1.5rem;
+    }
+
+    /* Shrink section headers */
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .cat-title {
+        font-size: 1.9rem;
+    }
+
+    /* Booking: reduce card padding */
+    .booking-container.border-card {
+        padding: 1.75rem 1.25rem;
+    }
+
+    /* Force single-column service selection cards */
+    .booking-selection-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Tighter step labels */
+    .step-label {
+        font-size: 0.62rem;
+    }
+
+    /* Splash full-width on tablets */
+    .splash-content {
+        margin: 1rem;
+        padding: 2rem 1.5rem;
+        max-width: calc(100% - 2rem);
+    }
+
+    /* Modals */
+    .receipt-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .private-events-modal-card {
+        padding: 1.75rem 1.25rem;
+    }
+
+    .review-form-card {
+        padding: 1.75rem 1.25rem;
+    }
+
+    /* Body padding for sticky CTA */
+    body {
+        padding-bottom: 80px;
+    }
+}
+
+/* ============================================================
+   Mobile Sticky Book CTA (shown only on mobile)
+   ============================================================ */
+.mobile-book-cta {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 900;
+    padding: 0.75rem 1.5rem;
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    background-color: rgba(248, 239, 225, 0.98);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid var(--border-color);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.mobile-book-cta.hidden {
+    opacity: 0;
+    transform: translateY(100%);
+    pointer-events: none;
+}
+
+.mobile-book-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    background-color: var(--color-text);
+    color: var(--bg-brand);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--color-text);
+    transition: var(--transition-fast);
+    min-height: 44px;
+}
+
+.mobile-book-btn:hover,
+.mobile-book-btn:active {
+    background-color: transparent;
+    color: var(--color-text);
+}
+
+@media (max-width: 768px) {
+    .mobile-book-cta {
+        display: block;
+    }
+}
+
+/* ============================================================
+   Phone breakpoint — 480px and below
+   ============================================================ */
+@media (max-width: 480px) {
+
+    /* Tighter global padding */
+    section {
+        padding: 3.5rem 1.25rem;
+    }
+
+    /* Header */
+    .header-container {
+        padding: 0.65rem 1.25rem;
+    }
+
+    .header-logo-img {
+        max-height: 55px;
+    }
+
+    .nav-menu {
+        top: 82px;
+    }
+
+    /* Category Heroes */
+    .category-hero {
+        height: 60vh;
+        min-height: 320px;
+    }
+
+    .category-hero-overlay {
+        padding: 0 1.25rem;
+    }
+
+    .category-hero-content {
+        padding: 1.75rem 1.5rem;
+        max-width: 100%;
+    }
+
+    .cat-number {
+        font-size: 0.68rem;
+    }
+
+    .cat-title {
+        font-size: 1.65rem;
+    }
+
+    .cat-desc {
+        font-size: 0.85rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Section headers */
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.68rem;
+    }
+
+    /* Services grid */
+    .service-card {
+        padding: 1.75rem 1.25rem;
+        min-height: 200px;
+    }
+
+    /* Tabs */
+    .tabs-container {
+        gap: 0.4rem;
+    }
+
+    .tab-btn {
+        font-size: 0.65rem;
+        padding: 0.45rem 0.8rem;
+        min-height: 38px;
+    }
+
+    /* Booking */
+    .booking-container.border-card {
+        padding: 1.25rem 1rem;
+    }
+
+    /* Hide step labels — show numbers only on very small phones */
+    .step-label {
+        display: none;
+    }
+
+    .step-num {
+        width: 26px;
+        height: 26px;
+        font-size: 0.68rem;
+    }
+
+    .booking-steps-bar::before {
+        top: 13px;
+    }
+
+    .booking-steps-bar {
+        margin-bottom: 2.5rem;
+    }
+
+    .select-card {
+        padding: 1.25rem 1rem;
+    }
+
+    /* Calendar */
+    .calendar-card {
+        padding: 1.25rem 1rem;
+    }
+
+    .calendar-day-cell {
+        font-size: 0.72rem;
+    }
+
+    .time-slots-card {
+        padding: 1.25rem 1rem;
+    }
+
+    /* Touch-friendly time slots */
+    .time-slot-btn {
+        min-height: 44px;
+        font-size: 0.72rem;
+    }
+
+    /* Touch-friendly star rating */
+    .star-btn {
+        font-size: 1.5rem;
+        padding: 4px 6px;
+        min-height: 44px;
+    }
+
+    /* Touch-friendly buttons */
+    .btn {
+        min-height: 44px;
+    }
+
+    /* Botanical */
+    .botanical-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .botanical-name {
+        font-size: 1.3rem;
+    }
+
+    /* Private events */
+    .private-events-title {
+        font-size: 1.75rem;
+    }
+
+    .private-events-desc {
+        font-size: 0.88rem;
+    }
+
+    /* Splash */
+    .splash-content {
+        margin: 0.75rem;
+        padding: 1.75rem 1.25rem;
+        max-width: calc(100% - 1.5rem);
+    }
+
+    .splash-logo {
+        max-width: 200px;
+    }
+
+    .splash-heading {
+        font-size: 0.75rem;
+    }
+
+    /* Modals: near full-screen on phones */
+    .modal-overlay {
+        padding: 0.75rem;
+        align-items: flex-end;
+    }
+
+    .receipt-card {
+        padding: 1.75rem 1.25rem;
+        max-width: 100%;
+        border-radius: 0;
+    }
+
+    .private-events-modal-card {
+        padding: 1.5rem 1.25rem;
+        max-width: 100%;
+        max-height: 95vh;
+    }
+
+    /* Reviews */
+    .review-form-card {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .reviews-summary {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .avg-score {
+        font-size: 2.5rem;
+    }
+
+    /* Footer */
+    .main-footer {
+        padding: 3rem 1.25rem 2rem;
+    }
+
+    /* Extra body padding for sticky CTA on small phones */
+    body {
+        padding-bottom: 90px;
+    }
 }
