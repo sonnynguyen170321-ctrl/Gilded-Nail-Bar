@@ -110,18 +110,18 @@ const STYLISTS_DATA = [
 ];
 
 const GALLERY_DATA = [
-    { id: 'gal-1', name: '24k Gold Leaf Accents', category: 'gold-foil', image: 'nailart_aesthetic.webp' },
-    { id: 'gal-2', name: 'Chrome Over Gold Base', category: 'chrome', image: 'nailart_aesthetic.webp' },
-    { id: 'gal-3', name: 'Abstract Line Art', category: 'abstract', image: 'nailart_aesthetic.webp' },
-    { id: 'gal-4', name: 'Aprés Gel-X Medium', category: 'gel-x', image: 'extensions_aesthetic.webp' },
-    { id: 'gal-5', name: 'Modern French Edge', category: 'french', image: 'manicure_aesthetic.webp' },
-    { id: 'gal-6', name: 'Gold Foil Ombre Set', category: 'gold-foil', image: 'nailart_aesthetic.webp' },
-    { id: 'gal-7', name: 'Structured Gel Overlay', category: 'gel-x', image: 'extensions_aesthetic.webp' },
-    { id: 'gal-8', name: 'Iridescent Chrome Fade', category: 'chrome', image: 'pedicure_aesthetic.webp' },
-    { id: 'gal-9', name: 'Geometric Negative Space', category: 'abstract', image: 'nailart_aesthetic.webp' },
-    { id: 'gal-10', name: 'Soft Square Gel-X', category: 'gel-x', image: 'extensions_aesthetic.webp' },
-    { id: 'gal-11', name: 'Liquid Gold French Tip', category: 'french', image: 'manicure_aesthetic.webp' },
-    { id: 'gal-12', name: 'Hand-Painted Abstract', category: 'abstract', image: 'nailart_aesthetic.webp' }
+    { id: 'gal-1', name: '24k Gold Leaf Accents', category: 'gold-foil', image: 'nailart_aesthetic.png' },
+    { id: 'gal-2', name: 'Chrome Over Gold Base', category: 'chrome', image: 'nailart_aesthetic.png' },
+    { id: 'gal-3', name: 'Abstract Line Art', category: 'abstract', image: 'nailart_aesthetic.png' },
+    { id: 'gal-4', name: 'Aprés Gel-X Medium', category: 'gel-x', image: 'extensions_aesthetic.png' },
+    { id: 'gal-5', name: 'Modern French Edge', category: 'french', image: 'manicure_aesthetic.png' },
+    { id: 'gal-6', name: 'Gold Foil Ombre Set', category: 'gold-foil', image: 'nailart_aesthetic.png' },
+    { id: 'gal-7', name: 'Structured Gel Overlay', category: 'gel-x', image: 'extensions_aesthetic.png' },
+    { id: 'gal-8', name: 'Iridescent Chrome Fade', category: 'chrome', image: 'pedicure_aesthetic.png' },
+    { id: 'gal-9', name: 'Geometric Negative Space', category: 'abstract', image: 'nailart_aesthetic.png' },
+    { id: 'gal-10', name: 'Soft Square Gel-X', category: 'gel-x', image: 'extensions_aesthetic.png' },
+    { id: 'gal-11', name: 'Liquid Gold French Tip', category: 'french', image: 'manicure_aesthetic.png' },
+    { id: 'gal-12', name: 'Hand-Painted Abstract', category: 'abstract', image: 'nailart_aesthetic.png' }
 ];
 
 const PRODUCTS_DATA = [
@@ -768,7 +768,10 @@ function renderBookingCalendar() {
         cell.className = 'calendar-day-cell';
         cell.innerText = dayNum;
 
-        if (cellDate < today) {
+        const dayOfWeek = cellDate.getDay();
+        const isClosed = dayOfWeek === 0 || dayOfWeek === 1; // closed Sun & Mon
+
+        if (cellDate < today || isClosed) {
             cell.classList.add('disabled');
         } else {
             cell.addEventListener('click', () => {
