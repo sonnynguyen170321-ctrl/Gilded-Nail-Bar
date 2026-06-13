@@ -33,7 +33,7 @@ All booking and review data is currently **client-side mock only** (localStorage
 - Use Next.js Server Actions for form submissions and mutations
 - Use Next.js API routes only for webhooks (Twilio, Resend) or third-party callbacks
 - Do not introduce Express or a separate backend server
-- The v2 migration is a **redesign** — not a pixel-for-pixel port of v1. Keep the dark luxury brand identity but evolve the layout and component structure in Next.js
+- The v2 migration is a **redesign** — not a pixel-for-pixel port of v1. Keep the warm beige apothecary brand identity (cream silk #f8efe1, bronze #584638) but evolve the layout and component structure in Next.js
 - All database queries use Drizzle ORM — define schema in `/src/db/schema.ts`, query via Drizzle's typed query builder
 - CSS structure: one global `globals.css` for CSS custom properties (design tokens) only; all component-level styles in colocated `.module.css` files
 
@@ -122,12 +122,13 @@ TWILIO_PHONE_NUMBER
 ### Colors (finalized — do not change)
 | Token | Value | Use |
 |---|---|---|
-| `--bg-primary` | `#0c0c0e` | Page background |
-| `--bg-secondary` | `rgba(18,18,22,0.7)` + `backdrop-filter: blur(12px)` | Cards / glass panels |
-| `--accent-gold` | `#D4AF37` | Primary accent |
-| `--accent-champagne` | `#E5C158` | Hover / active gold |
-| `--text-primary` | `#F5F5F7` | Body text |
-| `--text-secondary` | `#A1A1A6` | Labels, descriptions |
+| `--bg-brand` | `#f8efe1` | Page background — cream silk |
+| `--bg-secondary` | `#f2ebe0` | Card / panel shading |
+| `--bg-concrete` | `#eae3d7` | Footer, dividers |
+| `--color-text` | `#584638` | Primary text, borders — earthy bronze |
+| `--color-muted` | `#8a7c71` | Labels, descriptions |
+| `--border-color` | `rgba(88, 70, 56, 0.25)` | Subtle borders |
+| `--border-color-strong` | `#584638` | Strong borders |
 
 ### Typography
 - **Headers**: `Cormorant Garamond` (serif)
@@ -161,7 +162,7 @@ TWILIO_PHONE_NUMBER
 | File | Purpose |
 |---|---|
 | `index.html` | Full single-page site markup |
-| `styles.css` | All styling — dark luxury theme |
+| `styles.css` | All styling — wabi-sabi apothecary theme |
 | `app.js` | Tab logic, mock data, booking step navigation |
 | `project_constitution.md` | Design + architecture standards reference |
 | `task_plan.md` | Phase tracking (BLAST framework) |
@@ -173,6 +174,6 @@ TWILIO_PHONE_NUMBER
 
 - Color palette and typography are finalized — do not substitute or "improve" them
 - Business details (address, phone, hours, service names, prices) are real — never overwrite with placeholder text
-- The luxury dark aesthetic is intentional — do not lighten backgrounds or simplify the visual language
+- The warm beige apothecary aesthetic (cream silk #f8efe1 background, earthy bronze #584638 text, no border-radius) is intentional — do not darken or simplify the visual language
 - Do not add Tailwind, Bootstrap, or any CSS framework
 - Do not use a third-party booking service (Vagaro, Square, Mindbody) — booking is always custom in-house

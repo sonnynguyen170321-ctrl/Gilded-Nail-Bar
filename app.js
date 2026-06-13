@@ -86,7 +86,8 @@ const STYLISTS_DATA = [
         role: 'Design Director / Master Stylist',
         specialty: 'Gel-X & Custom Art',
         avatarText: 'JV',
-        experience: '9 yrs experience'
+        experience: '9 yrs experience',
+        bio: 'Jax brings a fine-arts background to every set of nails, with expertise in Aprés Gel-X extensions and bespoke hand-painted designs. Trained in Tokyo and New York, their work has been featured in editorial spreads and runway presentations.'
     },
     {
         id: 'sty-amara',
@@ -94,7 +95,8 @@ const STYLISTS_DATA = [
         role: 'Master Nail Stylist',
         specialty: 'Minimalist Line Art & Cuticle Care',
         avatarText: 'AK',
-        experience: '7 yrs experience'
+        experience: '7 yrs experience',
+        bio: 'Amara specializes in the Russian dry manicure method and minimalist gold-foil linework. Her precision cuticle work and clean geometric designs have earned a dedicated following among Uptown Dallas clientele.'
     },
     {
         id: 'sty-sterling',
@@ -102,8 +104,24 @@ const STYLISTS_DATA = [
         role: 'Natural Care Specialist',
         specialty: 'Russian Cuticle & Therapy',
         avatarText: 'MS',
-        experience: '6 yrs experience'
+        experience: '6 yrs experience',
+        bio: 'Marcus is dedicated to nail health and restoration, combining therapeutic soak treatments with structural reinforcement techniques. His clientele includes those recovering from nail damage seeking strength and length restoration.'
     }
+];
+
+const GALLERY_DATA = [
+    { id: 'gal-1', name: '24k Gold Leaf Accents', category: 'gold-foil', image: 'nailart_aesthetic.webp' },
+    { id: 'gal-2', name: 'Chrome Over Gold Base', category: 'chrome', image: 'nailart_aesthetic.webp' },
+    { id: 'gal-3', name: 'Abstract Line Art', category: 'abstract', image: 'nailart_aesthetic.webp' },
+    { id: 'gal-4', name: 'Aprés Gel-X Medium', category: 'gel-x', image: 'extensions_aesthetic.webp' },
+    { id: 'gal-5', name: 'Modern French Edge', category: 'french', image: 'manicure_aesthetic.webp' },
+    { id: 'gal-6', name: 'Gold Foil Ombre Set', category: 'gold-foil', image: 'nailart_aesthetic.webp' },
+    { id: 'gal-7', name: 'Structured Gel Overlay', category: 'gel-x', image: 'extensions_aesthetic.webp' },
+    { id: 'gal-8', name: 'Iridescent Chrome Fade', category: 'chrome', image: 'pedicure_aesthetic.webp' },
+    { id: 'gal-9', name: 'Geometric Negative Space', category: 'abstract', image: 'nailart_aesthetic.webp' },
+    { id: 'gal-10', name: 'Soft Square Gel-X', category: 'gel-x', image: 'extensions_aesthetic.webp' },
+    { id: 'gal-11', name: 'Liquid Gold French Tip', category: 'french', image: 'manicure_aesthetic.webp' },
+    { id: 'gal-12', name: 'Hand-Painted Abstract', category: 'abstract', image: 'nailart_aesthetic.webp' }
 ];
 
 const PRODUCTS_DATA = [
@@ -246,6 +264,7 @@ let activeCalendarDate = new Date(); // Current date for calendar render
 
 // --- Initialize App ---
 document.addEventListener('DOMContentLoaded', () => {
+    initCustomIcons();
     initSplashEntrance();
     initNavigation();
     initServicesMenu();
@@ -253,10 +272,65 @@ document.addEventListener('DOMContentLoaded', () => {
     initReviewsSystem();
     initBookingsManager();
     initPrivateEventsModal();
+    initGiftCards();
     initMobileBookCta();
     initFooterAccordions();
+    initGallery();
+    initFaqAccordion();
     initScrollReveal();
 });
+
+// ==========================================================================
+// 0. Custom Icon Injection — replaces FontAwesome classes with inline SVGs
+// ==========================================================================
+function initCustomIcons() {
+    const faMap = {
+        'fa-solid fa-chevron-down': 'icon-chevron-down',
+        'fa-solid fa-chevron-left': 'icon-chevron-left',
+        'fa-solid fa-chevron-right': 'icon-chevron-right',
+        'fa-solid fa-check': 'icon-check',
+        'fa-solid fa-plus': 'icon-plus',
+        'fa-solid fa-calendar-plus': 'icon-calendar',
+        'fa-solid fa-calendar-check': 'icon-calendar',
+        'fa-regular fa-star': 'icon-star',
+        'fa-solid fa-star': 'icon-star-filled',
+        'fa-solid fa-location-dot': 'icon-pin',
+        'fa-solid fa-phone': 'icon-phone',
+        'fa-solid fa-envelope': 'icon-mail',
+        'fa-solid fa-bell': 'icon-sparkle',
+        'fa-brands fa-instagram': 'icon-instagram',
+        'fa-brands fa-pinterest': 'icon-pinterest',
+        'fa-brands fa-tiktok': 'icon-tiktok',
+        'fa-solid fa-sparkles': 'icon-sparkle',
+        'fa-regular fa-clock': 'icon-clock',
+        'fa-solid fa-clock': 'icon-clock',
+        'fa-solid fa-arrow-up-right-from-square': 'icon-arrow-up-right',
+        'fa-solid fa-car': 'icon-car',
+        'fa-solid fa-train': 'icon-train',
+        'fa-solid fa-xmark': 'icon-close',
+        'fa-solid fa-close': 'icon-close',
+        'fa-solid fa-bars': 'icon-menu',
+        'fa-solid fa-gift': 'icon-gift',
+        'fa-solid fa-leaf': 'icon-leaf',
+        'fa-solid fa-hand': 'icon-hand',
+        'fa-solid fa-bag-shopping': 'icon-bag',
+        'fa-regular fa-star-half-stroke': 'icon-star'
+    };
+
+    document.querySelectorAll('i[class*="fa-"]').forEach(el => {
+        const classStr = Array.from(el.classList).join(' ');
+        const iconId = faMap[classStr];
+        if (iconId) {
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('class', 'icon' + (iconId === 'icon-star-filled' ? ' icon-star-filled' : ''));
+            svg.setAttribute('aria-hidden', 'true');
+            const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+            use.setAttribute('href', '#' + iconId);
+            svg.appendChild(use);
+            el.replaceWith(svg);
+        }
+    });
+}
 
 // ==========================================================================
 // 1. Splash Screen & Location Selection
@@ -286,33 +360,58 @@ function initSplashEntrance() {
 }
 
 // ==========================================================================
-// 2. Navigation Menu & Hamburger Logic
+// 2. Navigation — Mega Menu & Mobile Toggle
 // ==========================================================================
 function initNavigation() {
     const mobileToggle = document.getElementById('mobile-toggle');
-    const navMenu = document.getElementById('nav-menu');
+    const megaMenu = document.getElementById('mega-menu');
+    const megaMenuBtn = document.getElementById('mega-menu-btn');
+    const megaMenuClose = document.getElementById('mega-menu-close');
     const header = document.getElementById('main-header');
-    
-    // Toggle mobile menu
+
+    function openMegaMenu() {
+        megaMenu.classList.add('active');
+        megaMenu.setAttribute('aria-hidden', 'false');
+        mobileToggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMegaMenu() {
+        megaMenu.classList.remove('active');
+        megaMenu.setAttribute('aria-hidden', 'true');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    }
+
+    // Mobile toggle
     mobileToggle.addEventListener('click', () => {
-        const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
-        mobileToggle.setAttribute('aria-expanded', !isExpanded);
-        navMenu.classList.toggle('active');
+        const isOpen = megaMenu.classList.contains('active');
+        isOpen ? closeMegaMenu() : openMegaMenu();
     });
 
-    // Close mobile menu on click of link
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileToggle.setAttribute('aria-expanded', 'false');
-            navMenu.classList.remove('active');
-            
-            // Toggle active visual line
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-        });
+    // Desktop "Menu" button
+    if (megaMenuBtn) {
+        megaMenuBtn.addEventListener('click', openMegaMenu);
+    }
+
+    // Close button
+    if (megaMenuClose) {
+        megaMenuClose.addEventListener('click', closeMegaMenu);
+    }
+
+    // Close on link click
+    document.querySelectorAll('.mega-menu-link').forEach(link => {
+        link.addEventListener('click', closeMegaMenu);
     });
 
-    // Scroll listener for menu shrinking
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && megaMenu.classList.contains('active')) {
+            closeMegaMenu();
+        }
+    });
+
+    // Scroll listener for header shrinking
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             header.style.padding = '0.5rem 0';
@@ -321,33 +420,6 @@ function initNavigation() {
             header.style.padding = '1.25rem 0';
             header.style.backgroundColor = 'rgba(248, 239, 225, 0.95)';
         }
-
-        // Active link highlight based on scroll position
-        const sections = document.querySelectorAll('main > section');
-        const navLinks = document.querySelectorAll('.nav-link');
-        let current = '';
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.scrollY >= (sectionTop - 180)) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            const href = link.getAttribute('href').slice(1);
-            
-            // Handle matching logic for category heroes
-            if (href.startsWith('category-') && current.startsWith('category-')) {
-                if (href === current) {
-                    link.classList.add('active');
-                }
-            } else if (href === current) {
-                link.classList.add('active');
-            }
-        });
     });
 
     // Handle Quick Book Banner links (Explore Menu links on banners)
@@ -423,7 +495,7 @@ function renderServices(category) {
                     <p class="service-desc">${service.description}</p>
                 </div>
                 <div class="service-footer">
-                    <span class="service-duration"><i class="fa-regular fa-clock"></i> ${service.duration}</span>
+                    <span class="service-duration"><svg class="icon" aria-hidden="true"><use href="#icon-clock"/></svg> ${service.duration}</span>
                     <a href="#booking" class="service-card-btn" data-id="${service.id}">
                         ADD TO BOOKING
                     </a>
@@ -580,7 +652,7 @@ function populateShopAddOns() {
         card.className = 'addon-card';
         card.dataset.id = product.id;
         card.innerHTML = `
-            <div class="addon-card-check"><i class="fa-solid fa-plus"></i></div>
+            <div class="addon-card-check"><svg class="icon" aria-hidden="true"><use href="#icon-plus"/></svg></div>
             <div class="addon-card-body">
                 <h4>${product.name}</h4>
                 <p class="card-subtext">${product.description}</p>
@@ -600,11 +672,13 @@ function toggleShopAddon(id, cardEl) {
     if (existingIdx > -1) {
         bookingState.addOns.splice(existingIdx, 1);
         cardEl.classList.remove('selected');
-        cardEl.querySelector('.addon-card-check i').className = 'fa-solid fa-plus';
+        const plusIcon = cardEl.querySelector('.addon-card-check use');
+        if (plusIcon) plusIcon.setAttribute('href', '#icon-plus');
     } else {
         bookingState.addOns.push(product);
         cardEl.classList.add('selected');
-        cardEl.querySelector('.addon-card-check i').className = 'fa-solid fa-check';
+        const checkIcon = cardEl.querySelector('.addon-card-check use');
+        if (checkIcon) checkIcon.setAttribute('href', '#icon-check');
     }
 }
 
@@ -618,7 +692,7 @@ function populateBookingStylists() {
     anyCard.className = 'select-card';
     anyCard.dataset.id = 'any';
     anyCard.innerHTML = `
-        <div class="stylist-avatar"><i class="fa-solid fa-sparkles"></i></div>
+        <div class="stylist-avatar"><svg class="icon" aria-hidden="true"><use href="#icon-sparkle"/></svg></div>
         <h4>First Available</h4>
         <p class="card-subtext">Match with any of our master artists</p>
     `;
@@ -636,6 +710,7 @@ function populateBookingStylists() {
             <h4>${stylist.name}</h4>
             <p class="card-subtext">${stylist.role}</p>
             <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-muted);">${stylist.specialty}</span>
+            <span style="display: block; font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-muted); margin-top: 0.25rem;">${stylist.experience}</span>
         `;
         
         card.addEventListener('click', () => {
@@ -718,12 +793,45 @@ function renderTimeSlots() {
     timeSlotsList.innerHTML = '';
 
     const slots = ["10:00 AM", "11:15 AM", "12:30 PM", "1:45 PM", "3:00 PM", "4:15 PM", "5:30 PM", "6:45 PM"];
+    const bookedSlots = JSON.parse(localStorage.getItem('gilded_booked_slots') || '[]');
+    const today = bookingState.date ? bookingState.date.toDateString() : '';
     
     slots.forEach(slot => {
         const slotBtn = document.createElement('button');
         slotBtn.type = 'button';
         slotBtn.className = 'time-slot-btn';
         slotBtn.innerText = slot;
+
+        const slotKey = today + '|' + slot;
+        const isBooked = bookedSlots.includes(slotKey);
+
+        if (isBooked) {
+            slotBtn.classList.add('booked');
+            slotBtn.disabled = true;
+
+            const waitlistBtn = document.createElement('button');
+            waitlistBtn.type = 'button';
+            waitlistBtn.className = 'time-slot-waitlist';
+            waitlistBtn.innerText = 'Notify me';
+            waitlistBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const email = prompt('Enter your email to be notified if this slot opens:');
+                if (email) {
+                    const waitlist = JSON.parse(localStorage.getItem('gilded_waitlist') || '[]');
+                    waitlist.push({ slot: slotKey, email });
+                    localStorage.setItem('gilded_waitlist', JSON.stringify(waitlist));
+                    waitlistBtn.innerText = 'Added!';
+                    waitlistBtn.disabled = true;
+                }
+            });
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'time-slot-wrapper';
+            wrapper.appendChild(slotBtn);
+            wrapper.appendChild(waitlistBtn);
+            timeSlotsList.appendChild(wrapper);
+            return;
+        }
 
         if (bookingState.time === slot) {
             slotBtn.classList.add('selected');
@@ -737,6 +845,17 @@ function renderTimeSlots() {
 
         timeSlotsList.appendChild(slotBtn);
     });
+
+    // Simulate some booked slots for demo purposes
+    if (!localStorage.getItem('gilded_booked_slots')) {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const tomorrowKey = tomorrow.toDateString();
+        localStorage.setItem('gilded_booked_slots', JSON.stringify([
+            tomorrowKey + '|10:00 AM',
+            tomorrowKey + '|1:45 PM',
+        ]));
+    }
 }
 
 // Step 5 Submit and Modal display
@@ -781,6 +900,45 @@ async function triggerBookingConfirmation() {
 
     await mockSupabase.from('appointments').insert([payload]);
 
+    // Mark this slot as booked in localStorage
+    const bookedSlots = JSON.parse(localStorage.getItem('gilded_booked_slots') || '[]');
+    const slotKey = bookingState.date.toDateString() + '|' + bookingState.time;
+    if (!bookedSlots.includes(slotKey)) {
+        bookedSlots.push(slotKey);
+        localStorage.setItem('gilded_booked_slots', JSON.stringify(bookedSlots));
+    }
+
+    // ICS Calendar download handler
+    const icsBtn = document.getElementById('receipt-ics-btn');
+    if (icsBtn) {
+        icsBtn.onclick = () => {
+            const startTime = bookingState.time.replace(' ', '').toUpperCase();
+            const endHour = parseInt(bookingState.time) + 1;
+            const endTime = startTime.replace(/^\d+/, endHour);
+
+            const icsContent = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Gilded Nail Bar//Booking//EN',
+                'BEGIN:VEVENT',
+                'DTSTART:' + bookingState.date.toISOString().split('T')[0].replace(/-/g, '') + 'T' + startTime.replace(/:/g, '').replace(' ', ''),
+                'DTEND:' + bookingState.date.toISOString().split('T')[0].replace(/-/g, '') + 'T' + startTime.replace(/:/g, '').replace(' ', ''),
+                'SUMMARY:Gilded Nail Bar - ' + bookingState.service.name,
+                'DESCRIPTION:Appointment with ' + bookingState.stylist.name + '\\nLocation: 3636 McKinney Ave, Suite 150, Dallas, TX 75204',
+                'LOCATION:3636 McKinney Ave, Suite 150, Dallas, TX 75204',
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n');
+
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'gilded-nail-bar-appointment.ics';
+            link.click();
+            URL.revokeObjectURL(link.href);
+        };
+    }
+
     const modal = document.getElementById('receipt-modal');
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
@@ -804,8 +962,8 @@ function resetBookingWizard() {
     document.querySelectorAll('.select-card').forEach(c => c.classList.remove('selected'));
     document.querySelectorAll('.addon-card').forEach(c => {
         c.classList.remove('selected');
-        const icon = c.querySelector('.addon-card-check i');
-        if (icon) icon.className = 'fa-solid fa-plus';
+        const use = c.querySelector('.addon-card-check use');
+        if (use) use.setAttribute('href', '#icon-plus');
     });
     document.querySelectorAll('.calendar-day-cell').forEach(c => c.classList.remove('active-day'));
     document.getElementById('time-slots-list').innerHTML = '';
@@ -890,13 +1048,13 @@ function initReviewsSystem() {
         selectedRating = parseInt(starBtn.dataset.rating);
         
         document.querySelectorAll('#star-rating-input .star-btn').forEach((btn, idx) => {
-            const starIcon = btn.querySelector('i');
+            const starUse = btn.querySelector('use');
             if (idx < selectedRating) {
                 btn.classList.add('active');
-                starIcon.className = 'fa-solid fa-star';
+                if (starUse) starUse.setAttribute('href', '#icon-star-filled');
             } else {
                 btn.classList.remove('active');
-                starIcon.className = 'fa-regular fa-star';
+                if (starUse) starUse.setAttribute('href', '#icon-star');
             }
         });
     });
@@ -926,7 +1084,8 @@ function initReviewsSystem() {
         selectedRating = 0;
         document.querySelectorAll('#star-rating-input .star-btn').forEach(btn => {
             btn.classList.remove('active');
-            btn.querySelector('i').className = 'fa-regular fa-star';
+            const starUse = btn.querySelector('use');
+            if (starUse) starUse.setAttribute('href', '#icon-star');
         });
 
         alert('Thank you for sharing your feedback!');
@@ -959,9 +1118,9 @@ async function renderReviews() {
     const roundedAvg = Math.round(parseFloat(avg));
     for (let i = 1; i <= 5; i++) {
         if (i <= roundedAvg) {
-            avgStarsEl.innerHTML += '<i class="fa-solid fa-star"></i>';
+            avgStarsEl.innerHTML += '<svg class="icon icon-star-filled" aria-hidden="true"><use href="#icon-star-filled"/></svg>';
         } else {
-            avgStarsEl.innerHTML += '<i class="fa-regular fa-star" style="opacity: 0.3;"></i>';
+            avgStarsEl.innerHTML += '<svg class="icon" aria-hidden="true" style="opacity: 0.3;"><use href="#icon-star"/></svg>';
         }
     }
 
@@ -972,9 +1131,9 @@ async function renderReviews() {
         let starsHtml = '';
         for (let i = 1; i <= 5; i++) {
             if (i <= review.rating) {
-                starsHtml += '<i class="fa-solid fa-star"></i>';
+                starsHtml += '<svg class="icon icon-star-filled" aria-hidden="true"><use href="#icon-star-filled"/></svg>';
             } else {
-                starsHtml += '<i class="fa-regular fa-star" style="opacity: 0.3;"></i>';
+                starsHtml += '<svg class="icon" aria-hidden="true" style="opacity: 0.3;"><use href="#icon-star"/></svg>';
             }
         }
 
@@ -1039,7 +1198,43 @@ function initPrivateEventsModal() {
 }
 
 // ==========================================================================
-// 8. Mobile Sticky Book CTA
+// 8. Gift Cards
+// ==========================================================================
+function initGiftCards() {
+    const amountBtns = document.querySelectorAll('.gift-amount-btn');
+    const amountDisplay = document.getElementById('gift-card-amount');
+    const purchaseBtn = document.getElementById('gift-purchase-btn');
+
+    if (!amountBtns.length) return;
+
+    let selectedAmount = 100;
+
+    amountBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            amountBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedAmount = parseInt(btn.dataset.amount);
+            if (amountDisplay) amountDisplay.textContent = '$' + selectedAmount;
+        });
+    });
+
+    if (purchaseBtn) {
+        purchaseBtn.addEventListener('click', () => {
+            const email = document.getElementById('gift-recipient')?.value;
+            if (!email) {
+                alert('Please enter a recipient email address.');
+                return;
+            }
+            const msg = document.getElementById('gift-message')?.value || '';
+            alert('Gift card for $' + selectedAmount + ' will be sent to ' + email + (msg ? ' with your message.' : '.'));
+            document.getElementById('gift-recipient').value = '';
+            if (document.getElementById('gift-message')) document.getElementById('gift-message').value = '';
+        });
+    }
+}
+
+// ==========================================================================
+// 9. Mobile Sticky Book CTA
 // ==========================================================================
 function initMobileBookCta() {
     const cta = document.getElementById('mobile-book-cta');
@@ -1084,7 +1279,63 @@ function initFooterAccordions() {
 }
 
 // ==========================================================================
-// 10. Scroll Reveal Animations (Intersection Observer)
+// 10. Gallery / Nail Art Vault
+// ==========================================================================
+function initGallery() {
+    const grid = document.getElementById('gallery-grid');
+    if (!grid) return;
+    renderGallery('all');
+
+    document.querySelectorAll('.gallery-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            renderGallery(tab.dataset.filter);
+        });
+    });
+}
+
+function renderGallery(filter) {
+    const grid = document.getElementById('gallery-grid');
+    grid.innerHTML = '';
+
+    GALLERY_DATA.forEach(item => {
+        if (filter !== 'all' && item.category !== filter) return;
+
+        const el = document.createElement('div');
+        el.className = 'gallery-item';
+        el.innerHTML = `
+            <div class="gallery-item-image" style="background-image: url('${item.image}'); background-size: cover; background-position: center;"></div>
+            <div class="gallery-item-overlay">
+                <span class="gallery-item-label">${item.category.replace('-', ' ')}</span>
+                <div class="gallery-item-name">${item.name}</div>
+            </div>
+        `;
+        grid.appendChild(el);
+    });
+}
+
+// ==========================================================================
+// 11. FAQ Accordion
+// ==========================================================================
+function initFaqAccordion() {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+
+    faqQuestions.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+            // Close all other questions
+            faqQuestions.forEach(other => {
+                other.setAttribute('aria-expanded', 'false');
+            });
+            // Toggle clicked question
+            btn.setAttribute('aria-expanded', !isExpanded);
+        });
+    });
+}
+
+// ==========================================================================
+// 11. Scroll Reveal Animations (Intersection Observer)
 // ==========================================================================
 function initScrollReveal() {
     const observerOptions = {
@@ -1118,5 +1369,12 @@ function initScrollReveal() {
             el.classList.add('scroll-reveal');
             revealObserver.observe(el);
         });
+    });
+
+    // Also observe new sections
+    const extraTargets = document.querySelectorAll('.gallery-section, .faq-section, .location-section, .gift-cards-section');
+    extraTargets.forEach(el => {
+        el.classList.add('scroll-reveal');
+        revealObserver.observe(el);
     });
 }
