@@ -184,15 +184,19 @@
         <div class="splash-bg"></div>
         <div class="splash-content">
             <div class="splash-logo-container">
-                <img src="gilded_logo.png" alt="Gilded Nail Bar Logo" class="splash-logo">
-            </div>
-            <div class="splash-box">
-                <h2 class="splash-heading">SELECT YOUR LOCATION</h2>
-                <div class="select-wrapper">
-                    <select id="location-select" aria-label="Select Salon Location">
-                        <option value="dallas">Dallas, TX — Uptown (3636 McKinney Ave)</option>
-                    </select>
+                <div class="logo-mark logo-mark-splash splash-logo" id="splash-logo-el">
+                    <span class="logo-mark-first">Gilded</span>
+                    <div class="logo-mark-line" aria-hidden="true">
+                        <span class="logo-mark-bar"></span>
+                        <span class="logo-mark-diamond"></span>
+                        <span class="logo-mark-bar"></span>
+                    </div>
+                    <span class="logo-mark-last">Nail Bar</span>
                 </div>
+            </div>
+            <div class="splash-entrance-line" id="splash-entrance-line"></div>
+            <div class="splash-box">
+                <p class="splash-location-line" id="splash-location-line">3636 McKinney Ave, Uptown Dallas</p>
                 <button type="button" class="btn-enter" id="enter-site-btn">ENTER SALON</button>
             </div>
         </div>
@@ -206,8 +210,16 @@
                 <svg class="icon icon-close" aria-hidden="true"><use href="#icon-close"/></svg>
             </button>
 
-            <a href="#" class="logo-link" id="logo">
-                <img src="gilded_logo.png" alt="Gilded Nail Bar" class="header-logo-img">
+            <a href="#" class="logo-link" id="logo" aria-label="Gilded Nail Bar">
+                <div class="logo-mark logo-mark-header">
+                    <span class="logo-mark-first">Gilded</span>
+                    <div class="logo-mark-line" aria-hidden="true">
+                        <span class="logo-mark-bar"></span>
+                        <span class="logo-mark-diamond"></span>
+                        <span class="logo-mark-bar"></span>
+                    </div>
+                    <span class="logo-mark-last">Nail Bar</span>
+                </div>
             </a>
             
             <div class="header-right">
@@ -263,9 +275,14 @@
             <div class="category-hero-overlay">
                 <div class="category-hero-content">
                     <span class="cat-number">01 / MANICURES</span>
+                    <div class="cat-accent" aria-hidden="true">
+                        <span class="cat-accent-bar"></span>
+                        <span class="cat-accent-diamond"></span>
+                        <span class="cat-accent-bar"></span>
+                    </div>
                     <h2 class="cat-title">THE MANICURE MENU</h2>
                     <p class="cat-desc">Essential cuticle care, shaping, Russian dry manicures, structured gel overlays, and bespoke color finishes.</p>
-                    <a href="#services" class="cat-btn-explore" data-category="manicures">EXPLORE MENU</a>
+                    <a href="#services" class="cat-btn-explore" data-category="manicures">EXPLORE MENU <span class="cat-btn-arrow" aria-hidden="true">→</span></a>
                 </div>
             </div>
         </section>
@@ -275,9 +292,14 @@
             <div class="category-hero-overlay">
                 <div class="category-hero-content">
                     <span class="cat-number">02 / PEDICURES</span>
+                    <div class="cat-accent" aria-hidden="true">
+                        <span class="cat-accent-bar"></span>
+                        <span class="cat-accent-diamond"></span>
+                        <span class="cat-accent-bar"></span>
+                    </div>
                     <h2 class="cat-title">THE PEDICURE MENU</h2>
                     <p class="cat-desc">Organic milk foot baths, natural scrubs, hydrating clay masks, and paraffin wax treatments in quiet, stone-soak tubs.</p>
-                    <a href="#services" class="cat-btn-explore" data-category="pedicures">EXPLORE MENU</a>
+                    <a href="#services" class="cat-btn-explore" data-category="pedicures">EXPLORE MENU <span class="cat-btn-arrow" aria-hidden="true">→</span></a>
                 </div>
             </div>
         </section>
@@ -287,9 +309,14 @@
             <div class="category-hero-overlay">
                 <div class="category-hero-content">
                     <span class="cat-number">03 / EXTENSIONS</span>
+                    <div class="cat-accent" aria-hidden="true">
+                        <span class="cat-accent-bar"></span>
+                        <span class="cat-accent-diamond"></span>
+                        <span class="cat-accent-bar"></span>
+                    </div>
                     <h2 class="cat-title">BESPOKE EXTENSIONS</h2>
                     <p class="cat-desc">Aprés Gel-X soft-gel extensions and structured hard-gel overlays, sculpted to align with your natural hand geometry.</p>
-                    <a href="#services" class="cat-btn-explore" data-category="extensions">EXPLORE MENU</a>
+                    <a href="#services" class="cat-btn-explore" data-category="extensions">EXPLORE MENU <span class="cat-btn-arrow" aria-hidden="true">→</span></a>
                 </div>
             </div>
         </section>
@@ -299,9 +326,14 @@
             <div class="category-hero-overlay">
                 <div class="category-hero-content">
                     <span class="cat-number">04 / NAIL ART</span>
+                    <div class="cat-accent" aria-hidden="true">
+                        <span class="cat-accent-bar"></span>
+                        <span class="cat-accent-diamond"></span>
+                        <span class="cat-accent-bar"></span>
+                    </div>
                     <h2 class="cat-title">NAIL ART VAULT</h2>
                     <p class="cat-desc">Intricate hand-painted linework, chrome foils, abstract layouts, and signature 24k liquid gold foil leaf settings.</p>
-                    <a href="#services" class="cat-btn-explore" data-category="nailart">EXPLORE MENU</a>
+                    <a href="#services" class="cat-btn-explore" data-category="nailart">EXPLORE MENU <span class="cat-btn-arrow" aria-hidden="true">→</span></a>
                 </div>
             </div>
         </section>
@@ -309,8 +341,8 @@
         <!-- Services Section (Apothecary Catalog Grid) -->
         <section id="services" class="services-section">
             <div class="section-header">
-                <span class="section-subtitle">TREATMENTS CATALOG</span>
-                <h2 class="section-title">THE SERVICE MENU</h2>
+                <span class="section-subtitle">THE APOTHECARY</span>
+                <h2 class="section-title">TREATMENTS & RITUALS</h2>
                 <div class="mono-line-divider"></div>
             </div>
 
@@ -334,7 +366,7 @@
         </section>
 
         <!-- Botanical Showcase Section -->
-        <section id="botanical" class="botanical-section">
+        <section id="botanical" class="botanical-section section--dark">
             <div class="section-header">
                 <span class="section-subtitle">RAW INGREDIENTS</span>
                 <h2 class="section-title">The Botanical Cabinet</h2>
@@ -383,7 +415,7 @@
         <!-- Gallery / Nail Art Vault -->
         <section id="gallery" class="gallery-section">
             <div class="section-header">
-                <span class="section-subtitle">PORTFOLIO</span>
+                <span class="section-subtitle">THE VAULT</span>
                 <h2 class="section-title">The Nail Art Vault</h2>
                 <div class="mono-line-divider"></div>
             </div>
@@ -424,6 +456,9 @@
                     <div class="tryon-palette-swatch" style="background-color: #b8a89a;" data-color="Greige Stone"></div>
                     <div class="tryon-palette-swatch" style="background-color: #e3c9b0;" data-color="Warm Almond"></div>
                 </div>
+                <div class="tryon-preview" id="tryon-preview" style="display:none;">
+                    <div class="tryon-preview-swatch" id="tryon-preview-swatch"></div>
+                </div>
                 <p class="tryon-swatch-label" id="tryon-swatch-label">Tap a shade to preview</p>
                 <div class="tryon-cta">
                     <p>Experience the full AR experience with our partner app:</p>
@@ -439,7 +474,7 @@
         <!-- FAQ Section -->
         <section id="faq" class="faq-section">
             <div class="section-header">
-                <span class="section-subtitle">GUIDANCE</span>
+                <span class="section-subtitle">GUIDANCE & ETIQUETTE</span>
                 <h2 class="section-title">Frequently Asked Questions</h2>
                 <div class="mono-line-divider"></div>
             </div>
@@ -556,25 +591,21 @@
 
             <div class="booking-container border-card">
                 <!-- Progress Header -->
-                <div class="booking-steps-bar" role="progressbar" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" id="booking-progress-bar">
+                <div class="booking-steps-bar" role="progressbar" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1" id="booking-progress-bar">
                     <div class="step active" data-step="1">
                         <span class="step-num">01</span>
                         <span class="step-label">Service</span>
                     </div>
                     <div class="step" data-step="2">
                         <span class="step-num">02</span>
-                        <span class="step-label">Shop</span>
+                        <span class="step-label">Stylist</span>
                     </div>
                     <div class="step" data-step="3">
                         <span class="step-num">03</span>
-                        <span class="step-label">Stylist</span>
+                        <span class="step-label">Schedule</span>
                     </div>
                     <div class="step" data-step="4">
                         <span class="step-num">04</span>
-                        <span class="step-label">Schedule</span>
-                    </div>
-                    <div class="step" data-step="5">
-                        <span class="step-num">05</span>
                         <span class="step-label">Confirm</span>
                     </div>
                 </div>
@@ -590,17 +621,8 @@
                         </div>
                     </div>
 
-                    <!-- Step 2: Artisanal Shop Add-ons -->
+                    <!-- Step 2: Choose Stylist -->
                     <div class="booking-panel" id="booking-panel-2">
-                        <h3 class="panel-title">ARTISANAL SHOP</h3>
-                        <p class="panel-desc">Add curated aftercare products and retail items to your reservation. All optional.</p>
-                        <div class="addon-selection-grid" id="booking-addons-list">
-                            <!-- Populated dynamically -->
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Choose Stylist -->
-                    <div class="booking-panel" id="booking-panel-3">
                         <h3 class="panel-title">CHOOSE A STYLIST</h3>
                         <p class="panel-desc">Our master artists are dedicated to perfecting your nails.</p>
                         <div class="booking-selection-grid" id="booking-stylists-list">
@@ -608,8 +630,8 @@
                         </div>
                     </div>
 
-                    <!-- Step 4: Date and Time Selector -->
-                    <div class="booking-panel" id="booking-panel-4">
+                    <!-- Step 3: Date and Time Selector -->
+                    <div class="booking-panel" id="booking-panel-3">
                         <h3 class="panel-title">SELECT DATE & TIME</h3>
                         <p class="panel-desc">Select an available appointment slot from the calendar.</p>
                         <div class="datetime-picker-wrapper">
@@ -636,8 +658,8 @@
                         </div>
                     </div>
 
-                    <!-- Step 5: Contact & Confirm Details -->
-                    <div class="booking-panel" id="booking-panel-5">
+                    <!-- Step 4: Contact & Confirm Details -->
+                    <div class="booking-panel" id="booking-panel-4">
                         <h3 class="panel-title">PERSONAL DETAILS</h3>
                         <p class="panel-desc">Complete your reservation information.</p>
                         <form class="booking-form" id="booking-details-form">
@@ -698,7 +720,7 @@
             <!-- Booking Success Receipt Modal (Simulating server output) -->
             <div class="modal-overlay" id="receipt-modal" aria-hidden="true" role="dialog">
                 <div class="receipt-card border-card">
-                    <div class="receipt-success-badge">
+                    <div class="receipt-success-badge" id="receipt-success-badge">
                         <i class="fa-solid fa-check"></i>
                     </div>
                     <h2>RESERVATION CONFIRMED</h2>
@@ -846,10 +868,15 @@
             <div class="gift-cards-container">
                 <div class="gift-card-preview border-card">
                     <div class="gift-card-face">
-                        <div class="gift-card-logo">
-                            <svg class="icon" aria-hidden="true"><use href="#icon-gift"/></svg>
+                        <div class="logo-mark logo-mark-gift" style="margin-bottom: 1.5rem;">
+                            <span class="logo-mark-first">Gilded</span>
+                            <div class="logo-mark-line" aria-hidden="true">
+                                <span class="logo-mark-bar"></span>
+                                <span class="logo-mark-diamond"></span>
+                                <span class="logo-mark-bar"></span>
+                            </div>
+                            <span class="logo-mark-last">Nail Bar</span>
                         </div>
-                        <h3 class="gift-card-title">Gilded Nail Bar</h3>
                         <p class="gift-card-sub">Digital Gift Card</p>
                         <div class="gift-card-divider"></div>
                         <p class="gift-card-amount" id="gift-card-amount">$100</p>
@@ -961,7 +988,7 @@
         <!-- Location & Map Section -->
         <section id="location" class="location-section">
             <div class="section-header">
-                <span class="section-subtitle">FIND US</span>
+                <span class="section-subtitle">THE STUDIO</span>
                 <h2 class="section-title">Location & Access</h2>
                 <div class="mono-line-divider"></div>
             </div>
@@ -1014,7 +1041,16 @@
             <!-- Footer columns function as accordions on mobile -->
             <div class="footer-col-accordion">
                 <button class="footer-accordion-btn" aria-expanded="false" aria-controls="footer-about-content">
-                    About Gilded <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+                    <span class="logo-mark logo-mark-footer">
+                        <span class="logo-mark-first">Gilded</span>
+                        <div class="logo-mark-line" aria-hidden="true">
+                            <span class="logo-mark-bar"></span>
+                            <span class="logo-mark-diamond"></span>
+                            <span class="logo-mark-bar"></span>
+                        </div>
+                        <span class="logo-mark-last">Nail Bar</span>
+                    </span>
+                    <i class="fa-solid fa-chevron-down accordion-arrow"></i>
                 </button>
                 <div class="footer-accordion-panel" id="footer-about-content">
                     <div class="panel-inner">
@@ -1070,15 +1106,41 @@
         </a>
     </div>
 
-    <!-- Rebook Nudge Banner -->
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+    <!-- Gift Card Confirmation Modal -->
+    <div class="modal-overlay" id="gift-confirm-modal" aria-hidden="true" role="dialog">
+        <div class="receipt-card border-card gift-confirm-card">
+            <div class="receipt-success-badge">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h2>GIFT CARD PURCHASED</h2>
+            <p class="receipt-subtitle">Your digital gift card is on its way.</p>
+            <div class="receipt-divider"></div>
+            <p class="gift-confirm-amount" id="gift-confirm-amount">$100</p>
+            <p class="gift-confirm-detail" id="gift-confirm-recipient">Sent to recipient@example.com</p>
+            <p style="font-family: var(--font-body); font-size: 0.85rem; color: var(--color-muted); line-height: 1.5; margin-bottom: 1.5rem;">
+                Your recipient will receive a beautifully designed digital gift card via email within the next 24 hours.
+            </p>
+            <button class="btn btn-solid w-100" id="gift-confirm-close-btn">DONE</button>
+        </div>
+    </div>
+
+    <!-- Rebook Nudge Floating Card -->
     <div class="rebook-nudge" id="rebook-nudge" style="display:none;">
         <div class="rebook-nudge-content">
-            <svg class="icon" aria-hidden="true"><use href="#icon-sparkle"/></svg>
-            <span id="rebook-nudge-text">Your gel manicure is due for a refresh.</span>
-            <a href="#booking" class="rebook-nudge-link">REBOOK NOW</a>
-            <button class="rebook-nudge-close" id="rebook-nudge-close" aria-label="Dismiss reminder">
-                <svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg>
-            </button>
+            <div class="rebook-nudge-header">
+                <svg class="icon" aria-hidden="true"><use href="#icon-sparkle"/></svg>
+                <span class="rebook-nudge-label">Refresh Reminder</span>
+                <button class="rebook-nudge-close" id="rebook-nudge-close" aria-label="Dismiss reminder">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg>
+                </button>
+            </div>
+            <p class="rebook-nudge-text" id="rebook-nudge-text">Your gel manicure is due for a refresh.</p>
+            <div class="rebook-nudge-actions">
+                <a href="#booking" class="rebook-nudge-link">REBOOK NOW</a>
+            </div>
         </div>
     </div>
 

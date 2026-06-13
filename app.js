@@ -284,6 +284,22 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================================================
+// Toast Notification System
+// ==========================================================================
+
+function showToast(message) {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.classList.add('removing');
+        setTimeout(() => toast.remove(), 400);
+    }, 3500);
+}
+
+// ==========================================================================
 // Accessibility: Focus Trap & Global Escape Handler
 // ==========================================================================
 
@@ -392,18 +408,30 @@ function initCustomIcons() {
 function initSplashEntrance() {
     const splash = document.getElementById('splash-screen');
     const enterBtn = document.getElementById('enter-site-btn');
-    
-    // Check if user already entered in this session
+    const locationLine = document.querySelector('.splash-location');
+    const logo = document.querySelector('.splash-logo');
+
     if (sessionStorage.getItem('gilded_entered') === 'true') {
         splash.style.display = 'none';
         return;
     }
 
+    if (logo) {
+        setTimeout(() => {
+            logo.classList.add('splash-logo--reveal');
+        }, 200);
+    }
+
+    if (locationLine) {
+        setTimeout(() => {
+            locationLine.classList.add('draw');
+        }, 1800);
+    }
+
     enterBtn.addEventListener('click', () => {
         splash.classList.add('fade-out');
         sessionStorage.setItem('gilded_entered', 'true');
-        
-        // Smooth scroll to first category hero
+
         setTimeout(() => {
             const firstHero = document.getElementById('category-manicures');
             if (firstHero) {
@@ -551,7 +579,7 @@ function renderServices(category) {
                 <div class="service-footer">
                     <span class="service-duration"><svg class="icon" aria-hidden="true"><use href="#icon-clock"/></svg> ${service.duration}</span>
                     <a href="#booking" class="service-card-btn" data-id="${service.id}">
-                        ADD TO BOOKING
+                        SELECT FOR RESERVATION
                     </a>
                 </div>
             `;
@@ -586,13 +614,12 @@ function initBookingWizard() {
 
     // Populate steps
     populateBookingServices();
-    populateShopAddOns();
     populateBookingStylists();
     renderBookingCalendar();
 }
 
 function navigateToBookingStep(targetStep) {
-    if (targetStep < 1 || targetStep > 5) return;
+    if (targetStep < 1 || targetStep > 4) return;
 
     document.getElementById(`booking-panel-${bookingState.step}`).classList.remove('active');
     bookingState.step = targetStep;
@@ -613,7 +640,7 @@ function navigateToBookingStep(targetStep) {
 
     prevBtn.disabled = bookingState.step === 1;
 
-    if (bookingState.step === 5) {
+    if (bookingState.step === 4) {
         nextBtn.innerHTML = 'Confirm Appointment';
     } else {
         nextBtn.innerHTML = 'Next Step';
@@ -625,25 +652,23 @@ function navigateToBookingStep(targetStep) {
 async function handleNextStepValidation() {
     if (bookingState.step === 1) {
         if (!bookingState.service) {
-            alert('Please select a service before proceeding.');
+            showToast('Please select a service before proceeding.');
             return;
         }
         navigateToBookingStep(2);
     } else if (bookingState.step === 2) {
+        if (!bookingState.stylist) {
+            showToast('Please select a stylist before proceeding.');
+            return;
+        }
         navigateToBookingStep(3);
     } else if (bookingState.step === 3) {
-        if (!bookingState.stylist) {
-            alert('Please select a stylist before proceeding.');
+        if (!bookingState.date || !bookingState.time) {
+            showToast('Please select a date and time slot.');
             return;
         }
         navigateToBookingStep(4);
     } else if (bookingState.step === 4) {
-        if (!bookingState.date || !bookingState.time) {
-            alert('Please select a date and an available time slot.');
-            return;
-        }
-        navigateToBookingStep(5);
-    } else if (bookingState.step === 5) {
         const form = document.getElementById('booking-details-form');
         if (!form.checkValidity()) {
             form.reportValidity();
@@ -652,7 +677,7 @@ async function handleNextStepValidation() {
 
         const depositConsent = document.getElementById('deposit-consent');
         if (depositConsent && !depositConsent.checked) {
-            alert('Please agree to the $10 deposit to secure your appointment.');
+            showToast('Please agree to the $10 deposit to secure your appointment.');
             return;
         }
 
@@ -872,26 +897,46 @@ function renderTimeSlots() {
             slotBtn.classList.add('booked');
             slotBtn.disabled = true;
 
-            const waitlistBtn = document.createElement('button');
-            waitlistBtn.type = 'button';
-            waitlistBtn.className = 'time-slot-waitlist';
-            waitlistBtn.innerText = 'Notify me';
-            waitlistBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const email = prompt('Enter your email to be notified if this slot opens:');
-                if (email) {
-                    const waitlist = JSON.parse(localStorage.getItem('gilded_waitlist') || '[]');
-                    waitlist.push({ slot: slotKey, email });
-                    localStorage.setItem('gilded_waitlist', JSON.stringify(waitlist));
-                    waitlistBtn.innerText = 'Added!';
-                    waitlistBtn.disabled = true;
+            const waitlistToggle = document.createElement('button');
+            waitlistToggle.type = 'button';
+            waitlistToggle.className = 'time-slot-waitlist';
+            waitlistToggle.innerText = 'Join waitlist';
+
+            const waitlistForm = document.createElement('div');
+            waitlistForm.className = 'waitlist-inline';
+            waitlistForm.innerHTML = `
+                <input type="email" placeholder="Your email" aria-label="Email for waitlist">
+                <button type="button">Notify Me</button>
+            `;
+
+            waitlistToggle.addEventListener('click', () => {
+                waitlistForm.classList.toggle('open');
+                if (waitlistForm.classList.contains('open')) {
+                    waitlistForm.querySelector('input').focus();
                 }
+            });
+
+            waitlistForm.querySelector('button').addEventListener('click', () => {
+                const email = waitlistForm.querySelector('input').value.trim();
+                if (!email || !email.includes('@')) {
+                    showToast('Please enter a valid email address.');
+                    return;
+                }
+                const waitlist = JSON.parse(localStorage.getItem('gilded_waitlist') || '[]');
+                waitlist.push({ slot: slotKey, email });
+                localStorage.setItem('gilded_waitlist', JSON.stringify(waitlist));
+                waitlistForm.querySelector('input').value = '';
+                waitlistForm.classList.remove('open');
+                waitlistToggle.innerText = 'Added!';
+                waitlistToggle.disabled = true;
+                showToast('You\'ll be notified if this slot opens.');
             });
 
             const wrapper = document.createElement('div');
             wrapper.className = 'time-slot-wrapper';
             wrapper.appendChild(slotBtn);
-            wrapper.appendChild(waitlistBtn);
+            wrapper.appendChild(waitlistToggle);
+            wrapper.appendChild(waitlistForm);
             timeSlotsList.appendChild(wrapper);
             return;
         }
@@ -1018,6 +1063,14 @@ async function triggerBookingConfirmation() {
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
     trapFocusOnActive(modal);
+
+    // Pulse the success badge
+    const badge = document.getElementById('receipt-success-badge');
+    if (badge) {
+        badge.classList.remove('pulse');
+        void badge.offsetWidth;
+        badge.classList.add('pulse');
+    }
 }
 
 function resetBookingWizard() {
@@ -1100,10 +1153,11 @@ async function renderBookingsList() {
         `;
 
         card.querySelector('.booking-item-cancel-btn').addEventListener('click', async () => {
-            if (confirm('Are you sure you want to cancel this reservation?')) {
-                await mockSupabase.from('appointments').delete().eq('id', appt.id);
-                renderBookingsList();
-            }
+            card.style.opacity = '0.3';
+            card.style.pointerEvents = 'none';
+            await mockSupabase.from('appointments').delete().eq('id', appt.id);
+            showToast('Reservation cancelled.');
+            renderBookingsList();
         });
 
         container.appendChild(card);
@@ -1140,7 +1194,7 @@ function initReviewsSystem() {
         e.preventDefault();
         
         if (selectedRating === 0) {
-            alert('Please select a star rating.');
+            showToast('Please select a star rating.');
             return;
         }
 
@@ -1165,7 +1219,7 @@ function initReviewsSystem() {
             if (starUse) starUse.setAttribute('href', '#icon-star');
         });
 
-        alert('Thank you for sharing your feedback!');
+        showToast('Thank you for sharing your experience.');
     });
 
     renderReviews();
@@ -1300,13 +1354,31 @@ function initGiftCards() {
         purchaseBtn.addEventListener('click', () => {
             const email = document.getElementById('gift-recipient')?.value;
             if (!email) {
-                alert('Please enter a recipient email address.');
+                showToast('Please enter a recipient email address.');
                 return;
             }
             const msg = document.getElementById('gift-message')?.value || '';
-            alert('Gift card for $' + selectedAmount + ' will be sent to ' + email + (msg ? ' with your message.' : '.'));
+
+            document.getElementById('gift-confirm-amount').textContent = '$' + selectedAmount;
+            document.getElementById('gift-confirm-recipient').textContent = 'Sent to ' + email;
+
+            const modal = document.getElementById('gift-confirm-modal');
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            trapFocusOnActive(modal);
+
             document.getElementById('gift-recipient').value = '';
             if (document.getElementById('gift-message')) document.getElementById('gift-message').value = '';
+        });
+    }
+
+    // Gift confirm modal close
+    const giftConfirmClose = document.getElementById('gift-confirm-close-btn');
+    const giftConfirmModal = document.getElementById('gift-confirm-modal');
+    if (giftConfirmClose && giftConfirmModal) {
+        giftConfirmClose.addEventListener('click', () => {
+            giftConfirmModal.classList.remove('active');
+            giftConfirmModal.setAttribute('aria-hidden', 'true');
         });
     }
 }
@@ -1351,23 +1423,43 @@ function initLoyalty() {
         checkinBtn.addEventListener('click', () => {
             let visits = getVisits();
             if (visits >= MAX_VISITS) {
-                alert('You already have a reward waiting! Show this page at your next appointment to redeem.');
+                showToast('You already have a reward waiting! Show this page at your next appointment to redeem.');
                 return;
             }
             visits++;
             setVisits(visits);
             renderLoyalty();
+            // Animate the newly filled stamp
+            const filledStamps = stampsContainer.querySelectorAll('.loyalty-stamp.filled');
+            const lastFilled = filledStamps[filledStamps.length - 1];
+            if (lastFilled) {
+                lastFilled.classList.add('pop');
+            }
             if (visits >= MAX_VISITS) {
-                alert('Congratulations! You\'ve earned a complimentary Gel Manicure. Show this at your next appointment.');
+                showToast('Congratulations! You\'ve earned a complimentary Gel Manicure. Show this at your next appointment.');
             }
         });
     }
 
     if (resetBtn) {
+        let resetConfirming = false;
         resetBtn.addEventListener('click', () => {
-            if (confirm('Reset your loyalty card? This cannot be undone.')) {
+            if (!resetConfirming) {
+                resetConfirming = true;
+                resetBtn.textContent = 'CONFIRM RESET?';
+                resetBtn.style.borderColor = 'var(--border-color-strong)';
+                setTimeout(() => {
+                    resetConfirming = false;
+                    resetBtn.textContent = 'RESET';
+                    resetBtn.style.borderColor = '';
+                }, 4000);
+            } else {
                 setVisits(0);
                 renderLoyalty();
+                resetConfirming = false;
+                resetBtn.textContent = 'RESET';
+                resetBtn.style.borderColor = '';
+                showToast('Loyalty card has been reset.');
             }
         });
     }
@@ -1408,6 +1500,15 @@ function initTryOn() {
         swatch.addEventListener('click', () => {
             swatches.forEach(s => s.classList.remove('active'));
             swatch.classList.add('active');
+
+            const preview = document.getElementById('tryon-preview');
+            const previewSwatch = document.getElementById('tryon-preview-swatch');
+            const bgColor = swatch.style.backgroundColor;
+            if (preview && previewSwatch) {
+                previewSwatch.style.backgroundColor = bgColor;
+                preview.style.display = 'flex';
+            }
+
             if (label) label.textContent = swatch.dataset.color || 'Selected';
         });
     });
@@ -1493,12 +1594,15 @@ function renderGallery(filter) {
         if (filter !== 'all' && item.category !== filter) return;
 
         const el = document.createElement('div');
-        el.className = 'gallery-item';
+        el.className = 'gallery-item gallery-coming-soon';
         el.innerHTML = `
             <div class="gallery-item-image" style="background-image: url('${item.image}'); background-size: cover; background-position: center;"></div>
             <div class="gallery-item-overlay">
                 <span class="gallery-item-label">${item.category.replace('-', ' ')}</span>
                 <div class="gallery-item-name">${item.name}</div>
+            </div>
+            <div class="gallery-coming-overlay">
+                <span>COMING SOON</span>
             </div>
         `;
         grid.appendChild(el);
