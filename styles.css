@@ -301,19 +301,24 @@ a {
 
 .logo-link {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    height: 65px;
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
 .header-logo-img {
-    max-height: 90px;
+    height: 130px;
+    max-height: none;
     width: auto;
+    margin-top: -33px;
+    display: block;
     filter: none;
     transition: var(--transition-global);
 }
 
 .logo-link:hover .header-logo-img {
-    filter: brightness(1.05);
-    transform: translateY(-1px);
+    filter: brightness(0.9);
 }
 
 .nav-menu ul {
@@ -1863,14 +1868,18 @@ section {
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Correct nav dropdown position for larger logo */
-    .nav-menu {
-        top: 96px;
+    /* Crop logo container and nav position for tablet */
+    .logo-link {
+        height: 52px;
     }
 
-    /* Shrink logo on tablets */
     .header-logo-img {
-        max-height: 65px;
+        height: 104px;
+        margin-top: -26px;
+    }
+
+    .nav-menu {
+        top: 80px;
     }
 
     /* Tighter section padding */
@@ -2000,12 +2009,17 @@ section {
         padding: 0.65rem 1.25rem;
     }
 
+    .logo-link {
+        height: 44px;
+    }
+
     .header-logo-img {
-        max-height: 55px;
+        height: 88px;
+        margin-top: -22px;
     }
 
     .nav-menu {
-        top: 82px;
+        top: 66px;
     }
 
     /* Category Heroes */
