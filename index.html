@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gilded Nail Bar | Luxe Minimalist Nail Salon Uptown Dallas</title>
+    <meta name="description" content="Indulge in bespoke luxury nail art, structured gel manicures, and organic pedicures at Gilded Nail Bar on McKinney Ave, Dallas. Book online.">
+    <!-- Open Graph SEO -->
+    <meta property="og:title" content="Gilded Nail Bar | Luxe Minimalist Nail Salon Uptown Dallas">
+    <meta property="og:description" content="Bespoke luxury nail care, structured gel extensions, and gold foil accents in Uptown Dallas. Inspired by raw, minimalist design.">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Splash Entrance Screen -->
+    <div class="splash-screen" id="splash-screen">
+        <div class="splash-bg"></div>
+        <div class="splash-content">
+            <div class="splash-logo-container">
+                <img src="gilded_logo.png" alt="Gilded Nail Bar Logo" class="splash-logo">
+            </div>
+            <div class="splash-box">
+                <h2 class="splash-heading">SELECT YOUR LOCATION</h2>
+                <div class="select-wrapper">
+                    <select id="location-select" aria-label="Select Salon Location">
+                        <option value="dallas">Dallas, TX — Uptown (3636 McKinney Ave)</option>
+                    </select>
+                </div>
+                <button type="button" class="btn-enter" id="enter-site-btn">ENTER SALON</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+            <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <a href="#" class="logo-link" id="logo">
+                <img src="gilded_logo.png" alt="Gilded Nail Bar" class="header-logo-img">
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu" aria-label="Main Navigation">
+                <ul>
+                    <li><a href="#category-manicures" class="nav-link">Manicures</a></li>
+                    <li><a href="#category-pedicures" class="nav-link">Pedicures</a></li>
+                    <li><a href="#category-extensions" class="nav-link">Extensions</a></li>
+                    <li><a href="#category-nailart" class="nav-link">Nail Art</a></li>
+                    <li><a href="#booking" class="nav-link nav-cta">Book Now</a></li>
+                    <li><a href="#" class="nav-link open-private-events-btn">Private Events</a></li>
+                    <li><a href="#reviews" class="nav-link">Reviews</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-cta">
+                <a href="#booking" class="btn btn-sm btn-mono" id="header-book-btn">Book Appointment</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Horizontal Category Heros (Scroll Column) -->
+        <section id="category-manicures" class="category-hero">
+            <div class="hero-bg" style="background-image: url('manicure_aesthetic.png')"></div>
+            <div class="category-hero-overlay">
+                <div class="category-hero-content">
+                    <span class="cat-number">01 / MANICURES</span>
+                    <h2 class="cat-title">THE MANICURE MENU</h2>
+                    <p class="cat-desc">Essential cuticle care, shaping, Russian dry manicures, structured gel overlays, and bespoke color finishes.</p>
+                    <a href="#services" class="cat-btn-explore" data-category="manicures">EXPLORE MENU</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="category-pedicures" class="category-hero">
+            <div class="hero-bg" style="background-image: url('pedicure_aesthetic.png')"></div>
+            <div class="category-hero-overlay">
+                <div class="category-hero-content">
+                    <span class="cat-number">02 / PEDICURES</span>
+                    <h2 class="cat-title">THE PEDICURE MENU</h2>
+                    <p class="cat-desc">Organic milk foot baths, natural scrubs, hydrating clay masks, and paraffin wax treatments in quiet, stone-soak tubs.</p>
+                    <a href="#services" class="cat-btn-explore" data-category="pedicures">EXPLORE MENU</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="category-extensions" class="category-hero">
+            <div class="hero-bg" style="background-image: url('extensions_aesthetic.png')"></div>
+            <div class="category-hero-overlay">
+                <div class="category-hero-content">
+                    <span class="cat-number">03 / EXTENSIONS</span>
+                    <h2 class="cat-title">BESPOKE EXTENSIONS</h2>
+                    <p class="cat-desc">Aprés Gel-X soft-gel extensions and structured hard-gel overlays, sculpted to align with your natural hand geometry.</p>
+                    <a href="#services" class="cat-btn-explore" data-category="extensions">EXPLORE MENU</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="category-nailart" class="category-hero">
+            <div class="hero-bg" style="background-image: url('nailart_aesthetic.png')"></div>
+            <div class="category-hero-overlay">
+                <div class="category-hero-content">
+                    <span class="cat-number">04 / NAIL ART</span>
+                    <h2 class="cat-title">NAIL ART VAULT</h2>
+                    <p class="cat-desc">Intricate hand-painted linework, chrome foils, abstract layouts, and signature 24k liquid gold foil leaf settings.</p>
+                    <a href="#services" class="cat-btn-explore" data-category="nailart">EXPLORE MENU</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section (Apothecary Catalog Grid) -->
+        <section id="services" class="services-section">
+            <div class="section-header">
+                <span class="section-subtitle">TREATMENTS CATALOG</span>
+                <h2 class="section-title">THE SERVICE MENU</h2>
+                <div class="mono-line-divider"></div>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="tabs-container">
+                <button class="tab-btn active" data-category="all" id="tab-all">ALL SERVICES</button>
+                <button class="tab-btn" data-category="manicures" id="tab-manicures">MANICURES</button>
+                <button class="tab-btn" data-category="pedicures" id="tab-pedicures">PEDICURES</button>
+                <button class="tab-btn" data-category="extensions" id="tab-extensions">EXTENSIONS</button>
+                <button class="tab-btn" data-category="nailart" id="tab-nailart">BESPOKE ART</button>
+            </div>
+
+            <!-- Service Items List -->
+            <div class="services-grid" id="services-grid">
+                <!-- Fallback content for SEO indexing -->
+                <div class="service-item-fallback">
+                    <h3>Signature Gold Foil Manicure - $120</h3>
+                    <p>Filing, cuticle restoration, hot obsidian stone massage, finished with bespoke 24k gold foil leaf accents.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Botanical Showcase Section -->
+        <section id="botanical" class="botanical-section">
+            <div class="section-header">
+                <span class="section-subtitle">RAW INGREDIENTS</span>
+                <h2 class="section-title">The Botanical Cabinet</h2>
+                <div class="mono-line-divider"></div>
+            </div>
+            <div class="botanical-grid">
+                <div class="botanical-card">
+                    <span class="botanical-numeral">I</span>
+                    <h3 class="botanical-name">24k Gold Foil</h3>
+                    <span class="botanical-label">GILDED SIGNATURE</span>
+                    <p class="botanical-desc">Hand-placed liquid gold leaf for bespoke accent finishes. Applied using precision Japanese placement tools.</p>
+                </div>
+                <div class="botanical-card">
+                    <span class="botanical-numeral">II</span>
+                    <h3 class="botanical-name">Hot Basalt Stone</h3>
+                    <span class="botanical-label">STONE SOAK THERAPY</span>
+                    <p class="botanical-desc">Volcanic basalt stones heated to therapeutic temperature for deep muscle release and improved circulation.</p>
+                </div>
+                <div class="botanical-card">
+                    <span class="botanical-numeral">III</span>
+                    <h3 class="botanical-name">Organic Milk Soak</h3>
+                    <span class="botanical-label">HYDRATION BASE</span>
+                    <p class="botanical-desc">Lactic acid-rich organic milk soak softens calluses and nourishes dry skin without synthetic additives.</p>
+                </div>
+                <div class="botanical-card">
+                    <span class="botanical-numeral">IV</span>
+                    <h3 class="botanical-name">Raw Honey Clay</h3>
+                    <span class="botanical-label">MASK EMOLLIENT</span>
+                    <p class="botanical-desc">Wild-harvest raw honey blended with kaolin clay for a deeply conditioning pedicure mask.</p>
+                </div>
+                <div class="botanical-card">
+                    <span class="botanical-numeral">V</span>
+                    <h3 class="botanical-name">Moroccan Argan Oil</h3>
+                    <span class="botanical-label">CUTICLE NOURISHMENT</span>
+                    <p class="botanical-desc">Cold-pressed argan oil restores elasticity to the nail plate and cuticle matrix with essential trace minerals.</p>
+                </div>
+                <div class="botanical-card">
+                    <span class="botanical-numeral">VI</span>
+                    <h3 class="botanical-name">Himalayan Salt</h3>
+                    <span class="botanical-label">MINERAL EXFOLIANT</span>
+                    <p class="botanical-desc">Unrefined pink Himalayan salt crystals dissolved in warm soak water for gentle mineral exfoliation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Booking Wizard -->
+        <section id="booking" class="booking-section">
+            <div class="section-header">
+                <span class="section-subtitle">RESERVATIONS SYSTEM</span>
+                <h2 class="section-title">BOOK AN APPOINTMENT</h2>
+                <div class="mono-line-divider"></div>
+            </div>
+
+            <div class="booking-container border-card">
+                <!-- Progress Header -->
+                <div class="booking-steps-bar" role="progressbar" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" id="booking-progress-bar">
+                    <div class="step active" data-step="1">
+                        <span class="step-num">01</span>
+                        <span class="step-label">Service</span>
+                    </div>
+                    <div class="step" data-step="2">
+                        <span class="step-num">02</span>
+                        <span class="step-label">Shop</span>
+                    </div>
+                    <div class="step" data-step="3">
+                        <span class="step-num">03</span>
+                        <span class="step-label">Stylist</span>
+                    </div>
+                    <div class="step" data-step="4">
+                        <span class="step-num">04</span>
+                        <span class="step-label">Schedule</span>
+                    </div>
+                    <div class="step" data-step="5">
+                        <span class="step-num">05</span>
+                        <span class="step-label">Confirm</span>
+                    </div>
+                </div>
+
+                <!-- Booking Panel Views -->
+                <div class="booking-panel-content">
+                    <!-- Step 1: Services List Selection -->
+                    <div class="booking-panel active" id="booking-panel-1">
+                        <h3 class="panel-title">CHOOSE A SERVICE</h3>
+                        <p class="panel-desc">Select the treatment you would like to reserve.</p>
+                        <div class="booking-selection-grid" id="booking-services-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Artisanal Shop Add-ons -->
+                    <div class="booking-panel" id="booking-panel-2">
+                        <h3 class="panel-title">ARTISANAL SHOP</h3>
+                        <p class="panel-desc">Add curated aftercare products and retail items to your reservation. All optional.</p>
+                        <div class="addon-selection-grid" id="booking-addons-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Choose Stylist -->
+                    <div class="booking-panel" id="booking-panel-3">
+                        <h3 class="panel-title">CHOOSE A STYLIST</h3>
+                        <p class="panel-desc">Our master artists are dedicated to perfecting your nails.</p>
+                        <div class="booking-selection-grid" id="booking-stylists-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Date and Time Selector -->
+                    <div class="booking-panel" id="booking-panel-4">
+                        <h3 class="panel-title">SELECT DATE & TIME</h3>
+                        <p class="panel-desc">Select an available appointment slot from the calendar.</p>
+                        <div class="datetime-picker-wrapper">
+                            <div class="calendar-card border-card">
+                                <div class="calendar-header">
+                                    <button type="button" class="calendar-nav-btn" id="prev-month-btn" aria-label="Previous month"><i class="fa-solid fa-chevron-left"></i></button>
+                                    <h4 id="calendar-month-year">June 2026</h4>
+                                    <button type="button" class="calendar-nav-btn" id="next-month-btn" aria-label="Next month"><i class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                                <div class="calendar-weekdays">
+                                    <span>SU</span><span>MO</span><span>TU</span><span>WE</span><span>TH</span><span>FR</span><span>SA</span>
+                                </div>
+                                <div class="calendar-days" id="calendar-days-grid">
+                                    <!-- Dynamic calendar -->
+                                </div>
+                            </div>
+
+                            <div class="time-slots-card border-card">
+                                <h4>AVAILABLE TIME SLOTS</h4>
+                                <div class="time-slots-grid" id="time-slots-list">
+                                    <!-- Dynamic time slots -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Contact & Confirm Details -->
+                    <div class="booking-panel" id="booking-panel-5">
+                        <h3 class="panel-title">PERSONAL DETAILS</h3>
+                        <p class="panel-desc">Complete your reservation information.</p>
+                        <form class="booking-form" id="booking-details-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="client-name">Full Name</label>
+                                    <input type="text" id="client-name" name="name" required placeholder="e.g. Elena Rostova">
+                                </div>
+                                <div class="form-group">
+                                    <label for="client-email">Email Address</label>
+                                    <input type="email" id="client-email" name="email" required placeholder="e.g. elena@example.com">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="client-phone">Phone Number</label>
+                                <input type="tel" id="client-phone" name="phone" required placeholder="e.g. (214) 555-0145">
+                            </div>
+                            <div class="form-group">
+                                <label for="client-notes">Special Requests (Optional)</label>
+                                <textarea id="client-notes" name="notes" placeholder="Any nail art style preference, structural requests, or details..."></textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Booking Panel Actions Navigation -->
+                <div class="booking-panel-actions">
+                    <button class="btn btn-outline" id="booking-prev-btn" disabled>Back</button>
+                    <button class="btn btn-solid" id="booking-next-btn">Next Step</button>
+                </div>
+            </div>
+
+            <div class="booking-helper-links">
+                <a href="#" class="view-bookings-link" id="view-bookings-btn"><i class="fa-solid fa-calendar-check"></i> VIEW MY RESERVATIONS</a>
+            </div>
+
+            <!-- Booking Success Receipt Modal (Simulating server output) -->
+            <div class="modal-overlay" id="receipt-modal" aria-hidden="true" role="dialog">
+                <div class="receipt-card border-card">
+                    <div class="receipt-success-badge">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h2>RESERVATION CONFIRMED</h2>
+                    <p class="receipt-subtitle">Thank you for choosing Gilded Nail Bar.</p>
+                    
+                    <div class="receipt-divider"></div>
+                    
+                    <div class="receipt-details">
+                        <div class="receipt-row">
+                            <span>SERVICE:</span>
+                            <strong id="receipt-service">Nail Art Session</strong>
+                        </div>
+                        <div class="receipt-row">
+                            <span>ARTIST:</span>
+                            <strong id="receipt-stylist">Amara King (Master Artist)</strong>
+                        </div>
+                        <div class="receipt-row">
+                            <span>DATE & TIME:</span>
+                            <strong id="receipt-datetime">June 18, 2026 at 2:00 PM</strong>
+                        </div>
+                        <div class="receipt-row">
+                            <span>CLIENT:</span>
+                            <strong id="receipt-client">Elena Rostova</strong>
+                        </div>
+                        <div id="receipt-addons-container"></div>
+                        <div class="receipt-row total-row">
+                            <span>TOTAL COST:</span>
+                            <strong id="receipt-price" class="price-highlight">$120.00</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="receipt-divider"></div>
+                    
+                    <p class="receipt-footer-msg"><i class="fa-solid fa-bell"></i> A calendar invite and SMS confirmation details have been synced locally!</p>
+                    
+                    <button class="btn btn-solid w-100" id="receipt-close-btn">DONE</button>
+                </div>
+            </div>
+
+            <!-- Bookings List Modal -->
+            <div class="modal-overlay" id="bookings-modal" aria-hidden="true" role="dialog">
+                <div class="receipt-card border-card bookings-list-card">
+                    <h2>MY RESERVATIONS</h2>
+                    <p class="receipt-subtitle">View and manage your active luxury appointments.</p>
+                    
+                    <div class="receipt-divider"></div>
+                    
+                    <div class="bookings-list-container" id="bookings-list-container">
+                        <!-- Bookings generated dynamically -->
+                    </div>
+                    
+                    <div class="receipt-divider"></div>
+                    
+                    <button class="btn btn-outline w-100" id="bookings-modal-close-btn">CLOSE</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section id="reviews" class="reviews-section">
+            <div class="section-header">
+                <span class="section-subtitle">GUEST FEEDBACK</span>
+                <h2 class="section-title">WHAT CLIENTS SAY</h2>
+                <div class="mono-line-divider"></div>
+            </div>
+
+            <div class="reviews-container">
+                <!-- Left: Write a review form -->
+                <div class="review-form-card border-card">
+                    <h3>SHARE YOUR EXPERIENCE</h3>
+                    <p>Your satisfaction is our primary goal. Write your review below.</p>
+                    <form id="new-review-form" class="review-form">
+                        <div class="form-group">
+                            <label for="review-name">Name</label>
+                            <input type="text" id="review-name" required placeholder="Elena Rostova">
+                        </div>
+                        <div class="form-group">
+                            <label>Rating</label>
+                            <div class="star-rating-input" id="star-rating-input">
+                                <button type="button" class="star-btn" data-rating="1" aria-label="1 star"><i class="fa-regular fa-star"></i></button>
+                                <button type="button" class="star-btn" data-rating="2" aria-label="2 stars"><i class="fa-regular fa-star"></i></button>
+                                <button type="button" class="star-btn" data-rating="3" aria-label="3 stars"><i class="fa-regular fa-star"></i></button>
+                                <button type="button" class="star-btn" data-rating="4" aria-label="4 stars"><i class="fa-regular fa-star"></i></button>
+                                <button type="button" class="star-btn" data-rating="5" aria-label="5 stars"><i class="fa-regular fa-star"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="review-text">Your Review</label>
+                            <textarea id="review-text" required placeholder="Describe your gilded experience..." rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-solid w-100" id="submit-review-btn">SUBMIT REVIEW</button>
+                    </form>
+                </div>
+
+                <!-- Right: Reviews Display Feed -->
+                <div class="reviews-feed-column">
+                    <div class="reviews-summary border-card">
+                        <div class="summary-score">
+                            <span class="avg-score" id="avg-score">4.9</span>
+                            <div class="stars" id="avg-stars-display">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="total-reviews" id="total-reviews-count">based on 128 verified guest entries</span>
+                        </div>
+                    </div>
+                    <div class="reviews-feed" id="reviews-feed">
+                        <!-- Reviews generated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Private Events Section -->
+        <section id="private-events-section" class="private-events-banner">
+            <div class="private-events-content">
+                <span class="section-subtitle">EXCLUSIVE BOOKINGS</span>
+                <h2 class="private-events-title">Private Events & Celebrations</h2>
+                <p class="private-events-desc">Reserve Gilded Nail Bar for bridal parties, milestone birthdays, corporate wellness events, and intimate celebrations. Full-salon buyouts available for groups of 4 to 16 guests.</p>
+                <button type="button" class="btn btn-solid open-private-events-btn">INQUIRE NOW</button>
+            </div>
+        </section>
+
+        <!-- Private Events Inquiry Modal -->
+        <div class="modal-overlay" id="private-events-modal" aria-hidden="true" role="dialog" aria-labelledby="private-events-modal-title">
+            <div class="receipt-card border-card private-events-modal-card">
+                <h2 id="private-events-modal-title">PRIVATE EVENT INQUIRY</h2>
+                <p class="receipt-subtitle">Reserve Gilded for your exclusive celebration.</p>
+
+                <div class="receipt-divider"></div>
+
+                <form class="booking-form" id="private-events-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pe-name">Full Name</label>
+                            <input type="text" id="pe-name" required placeholder="e.g. Sofia Reyes">
+                        </div>
+                        <div class="form-group">
+                            <label for="pe-email">Email Address</label>
+                            <input type="email" id="pe-email" required placeholder="e.g. sofia@example.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pe-phone">Phone Number</label>
+                            <input type="tel" id="pe-phone" required placeholder="(214) 555-0145">
+                        </div>
+                        <div class="form-group">
+                            <label for="pe-guests">Number of Guests</label>
+                            <input type="number" id="pe-guests" min="2" max="20" placeholder="e.g. 8">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pe-type">Event Type</label>
+                            <select id="pe-type" required>
+                                <option value="" disabled selected>Select event type</option>
+                                <option value="bridal">Bridal Party</option>
+                                <option value="birthday">Birthday Celebration</option>
+                                <option value="corporate">Corporate Wellness</option>
+                                <option value="other">Other Private Event</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="pe-date">Preferred Date</label>
+                            <input type="date" id="pe-date" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pe-notes">Additional Details</label>
+                        <textarea id="pe-notes" rows="3" placeholder="Tell us about your vision, special requests, or any details..."></textarea>
+                    </div>
+                    <div class="private-events-form-actions">
+                        <button type="button" class="btn btn-outline" id="private-events-close-btn">CANCEL</button>
+                        <button type="submit" class="btn btn-solid">SEND INQUIRY</button>
+                    </div>
+                </form>
+
+                <div id="private-events-success" class="private-events-success">
+                    <div class="receipt-success-badge">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h3 class="private-events-success-title">INQUIRY RECEIVED</h3>
+                    <p>Thank you! Our events team will be in touch within 24 hours.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <!-- Footer columns function as accordions on mobile -->
+            <div class="footer-col-accordion">
+                <button class="footer-accordion-btn" aria-expanded="false" aria-controls="footer-about-content">
+                    About Gilded <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+                </button>
+                <div class="footer-accordion-panel" id="footer-about-content">
+                    <div class="panel-inner">
+                        <p>We believe in high-end, bespoke nail artistry and holistic care. Combining raw organic spaces with exact techniques, Gilded Nail Bar is an artisan lounge for structural extensions, custom painted designs, and restorative treatments.</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+                            <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-col-accordion">
+                <button class="footer-accordion-btn" aria-expanded="false" aria-controls="footer-hours-content">
+                    Salon Hours <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+                </button>
+                <div class="footer-accordion-panel" id="footer-hours-content">
+                    <div class="panel-inner">
+                        <ul>
+                            <li><span>Monday – Friday:</span> <strong>10:00 AM – 8:00 PM</strong></li>
+                            <li><span>Saturday:</span> <strong>9:00 AM – 7:00 PM</strong></li>
+                            <li><span>Sunday:</span> <strong>11:00 AM – 6:00 PM</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-col-accordion">
+                <button class="footer-accordion-btn" aria-expanded="false" aria-controls="footer-contact-content">
+                    Visit Us <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+                </button>
+                <div class="footer-accordion-panel" id="footer-contact-content">
+                    <div class="panel-inner">
+                        <address>
+                            <p><i class="fa-solid fa-location-dot"></i> 3636 McKinney Ave, Suite 150<br>Dallas, TX 75204 (Uptown)</p>
+                            <p><i class="fa-solid fa-phone"></i> <a href="tel:+12145550145">(214) 555-0145</a></p>
+                            <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@gildednailbar.com">info@gildednailbar.com</a></p>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Gilded Nail Bar. All Rights Reserved. Inspired by Wabi-Sabi Aesthetics.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
