@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@1&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap');
+      .bg { fill: #f8efe1; }
+      .text-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 72px; fill: #584638; text-anchor: middle; }
+      .text-label { font-family: 'IBM Plex Mono', monospace; font-size: 22px; fill: #8a7c71; text-anchor: middle; }
+      .text-address { font-family: 'IBM Plex Mono', monospace; font-size: 16px; fill: #8a7c71; text-anchor: middle; }
+      .line-accent { stroke: #584638; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg" width="1080" height="1080"/>
+
+  <!-- Subtle linen grain texture -->
+  <filter id="noise">
+    <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer>
+      <feFuncA type="linear" slope="0.025"/>
+    </feComponentTransfer>
+  </filter>
+  <rect width="1080" height="1080" filter="url(#noise)" style="mix-blend-mode: multiply; pointer-events: none;"/>
+
+  <!-- Quote text -->
+  <text class="text-quote" x="540" y="440">Stillness is the</text>
+  <text class="text-quote" x="540" y="540">new luxury.</text>
+
+  <!-- Accent line -->
+  <line class="line-accent" x1="500" y1="610" x2="580" y2="610"/>
+
+  <!-- Bottom label -->
+  <text class="text-label" x="540" y="700">GILDED NAIL BAR</text>
+  <text class="text-address" x="540" y="750">3636 McKINNEY AVE, UPTOWN DALLAS</text>
+  <text class="text-address" x="540" y="790">TUE – SAT, 10AM – 7PM</text>
+</svg>

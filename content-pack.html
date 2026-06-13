@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gilded Nail Bar — Social Content Pack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@0;1&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-brand: #f8efe1;
+      --bg-secondary: #f2ebe0;
+      --bg-concrete: #eae3d7;
+      --color-text: #584638;
+      --color-muted: #8a7c71;
+      --color-gold: #c4a67a;
+      --border-color: rgba(88, 70, 56, 0.25);
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Inter', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg-brand);
+      color: var(--color-text);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 60px;
+    }
+    .logo-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .logo-diamond {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: var(--color-gold);
+      transform: rotate(45deg);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .logo-bars {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .logo-bar {
+      display: inline-block;
+      width: 1px;
+      height: 16px;
+      background: var(--color-text);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .logo-bar:nth-child(2) { height: 24px; }
+    header h1 {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 2.5rem;
+      font-weight: 400;
+      color: var(--color-text);
+      letter-spacing: -0.02em;
+    }
+    header .subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-muted);
+      margin-top: 8px;
+    }
+
+    /* Content */
+    h2 {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--color-text);
+      margin: 48px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    h2:first-of-type { margin-top: 0; }
+    h3 {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--color-text);
+      margin: 36px 0 12px;
+    }
+    h4 {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-muted);
+      margin: 24px 0 8px;
+    }
+    p { margin-bottom: 16px; font-size: 0.95rem; color: var(--color-text); }
+    hr {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: 40px 0;
+    }
+
+    /* Post blocks */
+    .post {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 32px;
+      margin: 32px 0;
+      border-radius: 0;
+    }
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .post-number {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-muted);
+    }
+    .post-type {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: var(--color-text);
+      color: var(--bg-brand);
+      padding: 2px 10px;
+    }
+    .post-details {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 4px 16px;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+    .post-details dt {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-muted);
+    }
+    .post-details dd { font-weight: 400; }
+
+    .caption-block {
+      background: var(--bg-brand);
+      border-left: 2px solid var(--color-gold);
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+      line-height: 1.7;
+    }
+    .caption-block strong { font-weight: 500; }
+
+    /* Slide cards */
+    .slide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .slide-card {
+      background: var(--bg-brand);
+      border: 1px solid var(--border-color);
+      padding: 20px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .slide-card .slide-label {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-gold);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    /* Visual notes */
+    .visual-notes {
+      background: rgba(88, 70, 56, 0.04);
+      border: 1px solid var(--border-color);
+      padding: 16px 20px;
+      margin: 12px 0;
+      font-size: 0.85rem;
+    }
+    .visual-notes::before {
+      content: 'VISUAL NOTES';
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-muted);
+      margin-bottom: 8px;
+    }
+
+    /* Hashtag list */
+    .hashtags {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-gold);
+      margin-top: 12px;
+    }
+
+    /* Schedule table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 16px 0;
+    }
+    th {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-muted);
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--color-text);
+    }
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-color);
+      font-weight: 400;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 60px 0;
+      margin-top: 60px;
+      border-top: 1px solid var(--border-color);
+    }
+    footer p {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-muted);
+    }
+
+    /* Print */
+    @media print {
+      body::after { display: none; }
+      .post { break-inside: avoid; page-break-inside: avoid; }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.8rem; }
+      .post { padding: 20px; }
+      .slide-grid { grid-template-columns: 1fr; }
+      .post-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <div class="logo-mark">
+        <span class="logo-bars"><span class="logo-bar"></span><span class="logo-bar"></span></span>
+        <span class="logo-diamond"></span>
+        <span class="logo-bars"><span class="logo-bar"></span><span class="logo-bar"></span></span>
+      </div>
+      <h1>Social Content Pack</h1>
+      <p class="subtitle">First 10 Posts &middot; June 2026</p>
+    </header>
+
+    <!-- Intro -->
+    <p style="font-size:0.95rem; text-align:center; max-width:560px; margin: 0 auto 48px;">
+      Copy-ready captions, carousel slide text, and visual direction for the first 10 priority posts.
+      Each entry follows the brand voice, caption templates, and aesthetic guidelines from the
+      <em>Gilded Nail Bar Social Media Content Plan v1.0</em>.
+    </p>
+
+    <!-- Post 1 -->
+    <div class="post">
+      <div class="post-header">
+        <span class="post-number">Post 01 &middot; Reel</span>
+        <span class="post-type">Pillar A — The Craft</span>
+      </div>
+      <h3 style="margin:0 0 12px;">Gold Leaf Application Macro</h3>
+      <dl class="post-details">
+        <dt>Duration</dt><dd>15 seconds</dd>
+        <dt>Format</dt><dd>9:16 vertical, 4K at 60fps, slow to 40%</dd>
+        <dt>Lens</dt><dd>105mm macro at f/3.2, extreme 2:1</dd>
+        <dt>Audio</dt><dd>Ambient salon quiet + low classical piano</dd>
+        <dt>Hashtags</dt><dd class="hashtags">#GildedNailBar #DallasNails #GoldFoilNails</dd>
+      </dl>
+
+      <h4>Caption</h4>
+      <div class="caption-block">Gold, placed.
+
+Every flake, by hand.
+
+#GildedNailBar #DallasNails #GoldFoilNails</div>
+
+      <h4>Text Overlay</h4>
+      <div class="caption-block" style="border-left-color:var(--color-text);">"Hand-placed 24k gold foil. Every leaf, intentional."</div>
+
+      <div class="visual-notes">
+        Extreme macro of tweezers placing gold leaf onto tacky gel. Slow motion. Natural window light from left with white reflector fill. Warm color grade per brand spec: +350K white balance, bronze shadows tinted #584638 at 15% opacity.
+      </div>
+    </div>
+
+    <!-- Post 2 -->
+    <div class="post">
+      <div class="post-header">
+        <span class="post-number">Post 02 &middot; Static</span>
+        <span class="post-type">Pillar B — Atmosphere</span>
+      </div>
+      <h3 style="margin:0 0 12px;">Salon Interior — Reception in Golden Hour</h3>
+      <dl class="post-details">
+        <dt>Format</dt><dd>Square 1:1</dd>
+        <dt>Lens</dt><dd>35mm prime at f/2.0</dd>
+        <dt>Time</dt><dd>Late afternoon golden hour</dd>
+        <dt>Hashtags</dt><dd class="hashtags">#GildedNailBar #UptownDallas #McKinneyAve</dd>
+      </dl>
+
+      <h4>Caption</h4>
+      <div class="caption-block">Late afternoon light through linen at Gilded.
+
+Concrete desk. Ceramic vessel. Brass lamp waiting for its first guest.
+
+&mdash;
+
+Gilded Nail Bar
+3636 McKinney Ave, Uptown Dallas
+Tue &ndash; Sat, 10AM &ndash; 7PM
+
+#GildedNailBar #UptownDallas #McKinneyAve</div>
+
+      <div class="visual-notes">
+        Shot from entrance looking toward reception desk. Sunlight streaming through linen curtains, warm shadows across concrete surface. Slightly desaturated. Film grain +8.
+      </div>
+    </div>
+
+    <!-- Post 3 -->
+    <div class="post">
+      <div class="post-header">
+        <span class="post-number">Post 03 &middot; Carousel (5 slides)</span>
+        <span class="post-type">Pillar C — Education</span>
+      </div>
+      <h3 style="margin:0 0 12px;">What Is Russian Dry Manicure?</h3>
+      <dl class="post-details">
+        <dt>Topic</dt><dd>Educational deep-dive — technique explainer</dd>
+        <dt>Goal</dt><dd>Build authority, differentiate from traditional salons</dd>
+        <dt>Hashtags</dt><dd class="hashtags">#GildedNailBar #RussianManicure #DryManicure</dd>
+      </dl>
+
+      <h4>Caption</h4>
+      <div class="caption-block">Why we never soak your cuticles in water.
+
+Water causes the nail plate to expand and then contract unevenly, lifting gel and weakening the bond. Our Russian dry technique uses an e-file with diamond bits to gently remove dead cuticle &mdash; no soaking, no lifting, no shortcuts.
+
+Your enhancement lasts 2&ndash;3 weeks longer.
+
+Save this post for your next visit.
+
+&mdash;
+
+Gilded Nail Bar | 3636 McKinney Ave
+
+#GildedNailBar #RussianManicure #DryManicure</div>
+
+      <h4>Slides</h4>
+      <div class="slide-grid">
+        <div class="slide-card">
+          <span class="slide-label">Slide 1 — Title</span>
+          <strong>THE RUSSIAN DRY MANICURE</strong><br>
+          What it is. Why it matters. Why we only work this way.
+        </div>
+        <div class="slide-card">
+          <span class="slide-label">Slide 2 — The Problem</span>
+          <strong>Conventional manicures soak</strong> your nails in water for 10–15 minutes. The nail plate absorbs moisture and expands. When it dries, it contracts unevenly, lifting any enhancement.
+        </div>
+        <div class="slide-card">
+          <span class="slide-label">Slide 3 — The Dry Method</span>
+          <strong>No water. No soaking. No cutting.</strong> A precision e-file with medical-grade diamond bits removes dead cuticle. The nail plate stays dry and stable.
+        </div>
+        <div class="slide-card">
+          <span class="slide-label">Slide 4 — Why It Lasts</span>
+          <strong>Perfect adhesion.</strong> No moisture trapped. No premature lifting. Your manicure lasts 2–3 weeks longer.
+        </div>
+        <div class="slide-card">
+          <span class="slide-label">Slide 5 — Book</span>
+          <strong>Russian Dry Manicure</strong><br>
+          Structured Gel Manicure — $85<br>
+          Essential Clean Manicure — $60<br><br>
+          Book at link in bio.
+        </div>
+      </div>
+
+      <div class="visual-notes">
+        All slides: cream #f8efe1 background. Title text in Cormorant Garamond italic bronze #584638. Accent line on slide 1. Slide 2: split illustration of nail expanding vs contracting. Slide 3: macro of e-file diamond bit. Slide 4: before/after day 1 vs day 21. Slide 5: hands on linen, finished manicure, warm natural light.
+      </div>
+    </div>
+
+    <!-- Post 4 -->
+    <div class="post">
+      <div class="post-header">
+        <span class="post-number">Post 04 &middot; Reel</span>
+        <span class="post-type">Pillar A — The Craft</span>
+      </div>
+      <h3 style="margin:0 0 12px;">Before / After Transformation</h3>
+      <dl class="post-details">
+        <dt>Duration</dt><dd>10 seconds</dd>
+        <dt>Format</dt><dd>9:16 vertical, split screen or whip transition</dd>
+        <dt>Hashtags</dt><dd class="hashtags">#GildedNailBar #DallasNails #NailArtDallas</dd>
+      </dl>
+
+      <h4>Caption</h4>
+      <div class="caption-block">Before &rarr; After.
+
+Russian dry technique. No water. No shortcuts.
+
+#GildedNailBar #DallasNails #NailArtDallas</div>
+
+      <h4>Text Overlay</h4>
+      <div class="caption-block" style="border-left-color:var(--color-text);">"Before // After — Russian Dry Technique"</div>
+
+      <div class="visual-notes">
+        Same hand, same lighting, same position. Left: dry cuticles + unpolished natural nail. Right: finished Structured Gel Manicure with high-shine top coat. Whip transition in center.
+      </div>
+    </div>
+
+    <!-- Post 5 -->
+    <div class="post">
+      <div class="post-header">
+        <span class="post-number">Post 05 &middot; Static</span>
+        <span class="post-type">Pillar A — The Craft</span>
+      </div>
+      <h3 style="margin:0 0 12px;">Signature Gilded Manicure Hero Shot</h3>
+      <dl class="post-details">
+        <dt>Format</dt><dd>4:5 vertical (1080 × 1350)</dd>
+        <dt>Lens</dt><dd>105mm macro at f/3.2</dd>
+        <dt>Service</dt><dd>Signature Gilded Manicure — $120</dd>
+        <dt>Hashtags</dt><dd class="hashtags">#GildedNailBar #DallasNails #LuxuryNails</dd>
+      </dl>
+
+      <h4>Caption</h4>
+      <div class="caption-block">Signature Gilded Manicure &mdash; $120
+
+Dry cuticle precision care, structured base alignment, and hand-placed 24k liquid gold foil leaf accents.
+
+Each nail finished with a high-shine top coat that catches the light like still water.
+
+Book your reservation at the link in our bio.
+
+&mdash;
+
+Gilded Nail Bar
+3636 McKinney Ave, Uptown Dallas
+Tue &ndash; Sat, 10AM &ndash; 7PM
+
+#GildedNailBar #DallasNails #LuxuryNails</div>
+
+      <div class="visual-notes">
+        Hand resting on raw linen, palms down. Gold foil accent on ring finger. Tight crop above wrist. Natural window light from left, white reflector. One prop: single gold leaf flake near hand.
+      </div>
+    </div>
+
+    <!-- Post 6 -->
+    <div class="post">
+      <div class="post-header">
+        <span class="post-number">Post 06 &middot; Reel</span>
+        <span class="post-type">Pillar A / B — Craft + Atmosphere</span>
+      </div>
+      <h3 style="margin:0 0 12px;">The Soak</h3>
+      <dl class="post-details">
+        <dt>Duration</dt><dd>15 seconds</dd>
+        <dt>Format</dt><dd>9:16, slow motion at 40%</dd>
+        <dt>Lens</dt><dd>50mm at f/2.0</dd>
+        <dt>Audio</dt><dd>Water sound + ambient drone — no music</dd>
+        <dt>Hashtags</dt><dd class="hashtags">#GildedNailBar #UptownDallas #DallasSelfCare</dd>
+      </dl>
+
+      <h4>Caption</h4>
+      <div class="caption-block">The ritual begins with water.
+
+And stillness.
+
+#GildedNailBar #UptownDallas #DallasSelfCare</div>
+
+      <div class="visual-notes">
+        Hands lowering into warm ceramic water bowl. Ripples catching golden hour light. Concrete surface visible beneath bowl. No text overlay during video — title fades in at end: "Stone Soak Pedicure — $95 | Gilded Nail Bar"
+      </div>
+    </div>
+
+    <!-- Post 7 -->
+    <div class="post">
+      <div class="post-header">
+        <span class="post-number">Post 07 &middot; Static</span>
+        <span class="post-type">Pillar B — Atmosphere</span>
+      </div>
+      <h3 style="margin:0 0 12px;">Product Shelf Arrangement</h3>
+      <dl class="post-details">
+        <dt>Format</dt><dd>Square 1:1</dd>
+        <dt>Lens</dt><dd>50mm at f/2.8</dd>
+        <dt>Style</dt><dd>Top-down or front-facing flat lay</dd>
+        <dt>Hashtags</dt><dd class="hashtags">#GildedNailBar #DallasNails #UptownDallas</dd>
+      </dl>
+
+      <h4>Caption</h4>
+      <div class="caption-block">Arranged by color. Every bottle, intentional.
+
+The product shelf at Gilded.
+
+&mdash;
+
+Gilded Nail Bar
+3636 McKinney Ave, Uptown Dallas
+Tue &ndash; Sat, 10AM &ndash; 7PM
+
+#GildedNailBar #DallasNails #UptownDallas</div>
+
+      <div class="visual-notes">
+        Polish bottles arranged by color gradient (cream → taupe → bronze → gold → deep brown). No labels visible — only color. Ceramic dish holding files and cuticle tools at one end.
+      </div>
+    </div>
+
+    <!-- Post 8 -->
+    <div class="post">
+      <div class="post-header">
+        <span class="post-number">Post 08 &middot; Reel</span>
+        <span class="post-type">Pillar D — Editorial &amp; Culture</span>
+      </div>
+      <h3 style="margin:0 0 12px;">Studio Tour — 30s Walk-Through</h3>
+      <dl class="post-details">
+        <dt>Duration</dt><dd>30 seconds</dd>
+        <dt>Format</dt><dd>9:16, continuous walk-through</dd>
+        <dt>Equipment</dt><dd>Gimbal (DJI OM6 or similar)</dd>
+        <dt>Audio</dt><dd>Warm lo-fi instrumental — no voiceover</dd>
+        <dt>Hashtags</dt><dd class="hashtags">#GildedNailBar #UptownDallas #McKinneyAve</dd>
+      </dl>
+
+      <h4>Caption</h4>
+      <div class="caption-block">3636 McKinney Ave.
+
+Enter the cabinet.
+
+&mdash;
+
+Gilded Nail Bar | Uptown Dallas | Tue &ndash; Sat, 10AM &ndash; 7PM
+
+#GildedNailBar #UptownDallas #McKinneyAve</div>
+
+      <h4>Shot Sequence</h4>
+      <div class="slide-grid">
+        <div class="slide-card">
+          <span class="slide-label">0–5s</span>
+          <strong>Exterior door</strong> — slow push-in, street number visible
+        </div>
+        <div class="slide-card">
+          <span class="slide-label">5–10s</span>
+          <strong>Reception</strong> — steady pan across desk, linen, brass lamp
+        </div>
+        <div class="slide-card">
+          <span class="slide-label">10–17s</span>
+          <strong>Nail stations</strong> — slow glide past two chairs, natural window light
+        </div>
+        <div class="slide-card">
+          <span class="slide-label">17–23s</span>
+          <strong>Soak bar</strong> — pull focus to ceramic bowls on concrete
+        </div>
+        <div class="slide-card">
+          <span class="slide-label">23–30s</span>
+          <strong>Product shelf</strong> — final hold, slow fade to logo
+        </div>
+      </div>
+
+      <div class="visual-notes">
+        Lower third text overlays at each location: "Reception" / "The Studio" / "The Soak Bar" / "The Vault" — IBM Plex Mono, 0.65rem, all-caps, letter-spacing 0.1em, cream text on dark.
+      </div>
+    </div>
+
+    <!-- Post 9 -->
+    <div class="post">
+      <div class="post-header">
+        <span class="post-number">Post 09 &middot; Carousel (6 slides)</span>
+        <span class="post-type">Pillar C — Education</span>
+      </div>
+      <h3 style="margin:0 0 12px;">Aftercare Guide — Make It Last 3 Weeks</h3>
+      <dl class="post-details">
+        <dt>Topic</dt><dd>Value content — high save rate</dd>
+        <dt>Goal</dt><dd>Position as experts, drive bookings for maintenance</dd>
+        <dt>Hashtags</dt><dd class="hashtags">#GildedNailBar #DallasNails #LuxuryNails</dd>
+      </dl>
+
+      <h4>Caption</h4>
+      <div class="caption-block">Three weeks. One manicure. Here's how.
+
+Your gel enhancement is an investment. Protect it with these six habits.
+
+Save this post &mdash; your next manicure will thank you.
+
+&mdash;
+
+Gilded Nail Bar | 3636 McKinney Ave
+
+#GildedNailBar #DallasNails #LuxuryNails</div>
+
+      <h4>Slides</h4>
+      <div class="slide-grid">
+        <div class="slide-card">
+          <span class="slide-label">Slide 1 — Title</span>
+          <strong>HOW TO MAKE YOUR GEL MANICURE LAST 3 WEEKS</strong><br>
+          Six aftercare habits from our artists.
+        </div>
+        <div class="slide-card">
+          <span class="slide-label">Slide 2 — Hydration</span>
+          <strong>OIL DAILY</strong><br>
+          Apply cuticle oil every morning and night. Gold Serum Cuticle Oil ($28) — jojoba and argan with 24k gold flakes. Dry cuticles lift. Hydrated cuticles hold.
+        </div>
+        <div class="slide-card">
+          <span class="slide-label">Slide 3 — Gloves</span>
+          <strong>GLOVES FOR WATER</strong><br>
+          Dishwashing, cleaning, gardening — wear gloves. Water weakens the gel bond. 10 minutes of gloves = 3 extra days of wear.
+        </div>
+        <div class="slide-card">
+          <span class="slide-label">Slide 4 — No Tools</span>
+          <strong>NEVER PICK OR PRY</strong><br>
+          Picking removes your natural nail plate. Book a 10-minute maintenance appointment instead.
+        </div>
+        <div class="slide-card">
+          <span class="slide-label">Slide 5 — Moisture</span>
+          <strong>HAND CREAM AFTER WATER</strong><br>
+          Every time you wash your hands, apply cream. The Organic Hand Ritual Cream ($32) is lightweight and gel-safe.
+        </div>
+        <div class="slide-card">
+          <span class="slide-label">Slide 6 — Sun + Summary</span>
+          <strong>SUN PROTECTION + SCHEDULE</strong><br>
+          UV exposure degrades gel color — apply SPF to hands. Book your fill at 2.5–3 weeks. Don't wait for lifting.
+        </div>
+      </div>
+
+      <div class="visual-notes">
+        Slide 2: macro of cuticle oil dropper. Slide 3: hands in cream cotton gloves on linen. Slide 4: side-by-side "DO NOT" vs "BOOK MAINTENANCE". Slide 5: hand cream next to finished manicure. Slide 6: hands in natural light with gold ring.
+      </div>
+    </div>
+
+    <!-- Post 10 -->
+    <div class="post">
+      <div class="post-header">
+        <span class="post-number">Post 10 &middot; Static</span>
+        <span class="post-type">Pillar D — Editorial &amp; Culture</span>
+      </div>
+      <h3 style="margin:0 0 12px;">Typographic Quote</h3>
+      <dl class="post-details">
+        <dt>Format</dt><dd>Square 1:1 (1080 × 1080)</dd>
+        <dt>Design</dt><dd>Can be produced as SVG or Canva graphic</dd>
+        <dt>Hashtags</dt><dd class="hashtags">#GildedNailBar #DallasNails #UptownDallas</dd>
+      </dl>
+
+      <h4>Caption</h4>
+      <div class="caption-block">Stillness is the new luxury.
+
+&mdash;
+
+Gilded Nail Bar
+3636 McKinney Ave, Uptown Dallas
+Tue &ndash; Sat, 10AM &ndash; 7PM
+
+#GildedNailBar #DallasNails #UptownDallas</div>
+
+      <h4>Design Specs</h4>
+      <div class="visual-notes">
+        Background: #f8efe1 (cream silk).<br>
+        Quote: Cormorant Garamond italic, 72px, #584638, centered.<br>
+        Accent line: 80px × 1px, #584638, centered below text.<br>
+        Label: IBM Plex Mono, uppercase, #8a7c71, 16–22px.<br>
+        Padding: 60px minimum all sides.
+      </div>
+
+      <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--color-muted); margin-top:16px;">
+        A ready-to-use SVG version is included as <strong>SOCIAL_QUOTE_TEMPLATE.svg</strong> — open in browser and screenshot, or import to Canva.
+      </p>
+    </div>
+
+    <!-- Schedule -->
+    <hr>
+    <h2 style="margin-top:0;">Posting Schedule</h2>
+    <table>
+      <thead>
+        <tr><th>Post</th><th>Day</th><th>Platform</th><th>Time</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>01 — Gold Leaf Reel</td><td>Monday</td><td>Instagram Reels + TikTok</td><td>6PM</td></tr>
+        <tr><td>02 — Reception Interior</td><td>Tuesday</td><td>Instagram Feed</td><td>11AM</td></tr>
+        <tr><td>03 — Russian Dry Carousel</td><td>Wednesday</td><td>Instagram Feed</td><td>11AM</td></tr>
+        <tr><td>04 — Before/After Reel</td><td>Thursday</td><td>Instagram Reels + TikTok</td><td>6PM</td></tr>
+        <tr><td>05 — Gilded Mani Hero</td><td>Friday</td><td>Instagram Feed</td><td>10AM</td></tr>
+        <tr><td>06 — The Soak Reel</td><td>Saturday</td><td>Instagram Reels</td><td>6PM</td></tr>
+        <tr><td style="border-bottom:2px solid var(--color-text);">07 — Product Shelf</td><td style="border-bottom:2px solid var(--color-text);">Tuesday (Wk 2)</td><td style="border-bottom:2px solid var(--color-text);">Instagram Feed</td><td style="border-bottom:2px solid var(--color-text);">11AM</td></tr>
+        <tr><td>08 — Studio Tour Reel</td><td>Thursday (Wk 2)</td><td>Instagram Reels + TikTok</td><td>6PM</td></tr>
+        <tr><td>09 — Aftercare Carousel</td><td>Friday (Wk 2)</td><td>Instagram Feed</td><td>10AM</td></tr>
+        <tr><td>10 — Typographic Quote</td><td>Sunday (Wk 2)</td><td>Instagram Feed</td><td>10AM</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Products used -->
+    <hr>
+    <h2 style="margin-top:0;">Retail Products Referenced</h2>
+    <table>
+      <thead>
+        <tr><th>Product</th><th>Price</th><th>Post</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Gold Serum Cuticle Oil</td><td>$28</td><td>Post 07 (shelf) + Post 09 (aftercare slide 2)</td></tr>
+        <tr><td>Strengthening Nail Serum</td><td>$35</td><td>Post 07 (shelf)</td></tr>
+        <tr><td>Gilded Neutral Polish Set</td><td>$48</td><td>Post 07 (shelf)</td></tr>
+        <tr><td>Organic Hand Ritual Cream</td><td>$32</td><td>Post 07 (shelf) + Post 09 (aftercare slide 5)</td></tr>
+        <tr><td>Anti-Chip Gel Top Coat</td><td>$22</td><td>Post 07 (shelf)</td></tr>
+        <tr><td>Botanical Foot Soak Blend</td><td>$38</td><td>Post 07 (shelf)</td></tr>
+      </tbody>
+    </table>
+
+    <footer>
+      <p>Gilded Nail Bar &middot; Social Content Pack v1.0 &middot; June 2026</p>
+      <p style="font-size:0.55rem; letter-spacing:0.15em; margin-top:4px;">3636 McKinney Ave, Uptown Dallas &middot; Tue–Sat 10AM–7PM</p>
+    </footer>
+
+  </div>
+</body>
+</html>
