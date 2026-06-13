@@ -8,7 +8,7 @@
     --bg-secondary: #f2ebe0;   /* Slightly deeper warm beige */
     --bg-concrete: #eae3d7;    /* Raw light concrete/stone tone */
     --color-text: #584638;     /* Dark bronze-brown text from logo */
-    --color-muted: #8a7c71;    /* Muted taupe/slate brown for secondary text */
+    --color-muted: #6f6055;    /* Muted taupe/slate brown for secondary text — 4.9:1 contrast on cream */
     
     --border-color: rgba(88, 70, 56, 0.25);
     --border-color-strong: #584638;
@@ -60,6 +60,42 @@ a {
     color: var(--color-text);
     text-decoration: none;
     transition: var(--transition-fast);
+}
+
+/* ADA / Accessibility */
+.skip-nav {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    z-index: 10000;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-text);
+    color: var(--bg-brand);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: top 0.2s ease;
+}
+
+.skip-nav:focus {
+    top: 0;
+    outline: 2px solid var(--color-text);
+    outline-offset: 2px;
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 2px;
 }
 
 /* Scroll Reveal Animation System */
@@ -1243,12 +1279,158 @@ section {
     border-color: var(--color-text);
 }
 
+/* Deposit / Payment Section */
+.deposit-section {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 0.5rem;
+}
+
+.deposit-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.deposit-notice .icon {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+}
+
+.deposit-card-mock {
+    border: 1px solid var(--border-color);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    background: var(--bg-secondary);
+}
+
+.deposit-card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.deposit-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+}
+
+.deposit-dots {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--color-text);
+}
+
+.deposit-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 0.78rem;
+    color: var(--color-muted);
+    line-height: 1.5;
+}
+
+.deposit-checkbox input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    accent-color: var(--color-text);
+    border: 1px solid var(--border-color);
+}
+
 .booking-panel-actions {
     display: flex;
     justify-content: space-between;
     margin-top: 3rem;
     border-top: 1px solid var(--border-color);
     padding-top: 1.75rem;
+}
+
+/* Rebook Nudge Banner */
+.rebook-nudge {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9000;
+    background-color: var(--color-text);
+    color: var(--bg-brand);
+    padding: 0.75rem 1.5rem;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rebook-nudge-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+}
+
+.rebook-nudge-content .icon {
+    width: 1rem;
+    height: 1rem;
+    color: var(--bg-brand);
+    flex-shrink: 0;
+}
+
+.rebook-nudge-text {
+    flex: 1;
+}
+
+.rebook-nudge-link {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--bg-brand);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.rebook-nudge-link:hover {
+    opacity: 0.8;
+}
+
+.rebook-nudge-close {
+    background: none;
+    border: none;
+    color: var(--bg-brand);
+    cursor: pointer;
+    padding: 0.25rem;
+    flex-shrink: 0;
+}
+
+.rebook-nudge-close .icon {
+    width: 0.85rem;
+    height: 0.85rem;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
 }
 
 .booking-helper-links {
@@ -1744,6 +1926,80 @@ section {
 }
 
 /* ============================================================
+   Virtual Try-On Section
+   ============================================================ */
+.tryon-section {
+    padding: 6rem 4rem;
+    background-color: var(--bg-brand);
+}
+
+.tryon-container {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.tryon-palette {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.tryon-palette-swatch {
+    aspect-ratio: 1;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    position: relative;
+}
+
+.tryon-palette-swatch:hover {
+    transform: scale(1.1);
+    border-color: var(--color-text);
+    z-index: 1;
+}
+
+.tryon-palette-swatch.active {
+    border: 2px solid var(--color-text);
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+.tryon-swatch-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    margin-bottom: 2.5rem;
+    min-height: 1.5rem;
+}
+
+.tryon-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.tryon-cta p {
+    font-size: 0.85rem;
+}
+
+.tryon-cta .btn {
+    gap: 0.5rem;
+}
+
+.tryon-coming-soon {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-muted);
+    letter-spacing: 0.05em;
+}
+
+/* ============================================================
    FAQ Section — Accordion
    ============================================================ */
 .faq-section {
@@ -2149,6 +2405,157 @@ section {
     font-size: 0.85rem;
     font-weight: 500;
     flex-shrink: 0;
+}
+
+/* ============================================================
+   Loyalty / Rewards Section
+   ============================================================ */
+.loyalty-section {
+    padding: 6rem 4rem;
+    background-color: var(--bg-brand);
+}
+
+.loyalty-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.loyalty-card {
+    text-align: center;
+}
+
+.loyalty-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.loyalty-card-header .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-text);
+}
+
+.loyalty-card-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.loyalty-stamps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.loyalty-stamp {
+    aspect-ratio: 1;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.loyalty-stamp.filled {
+    border-color: var(--color-text);
+    background-color: var(--color-text);
+}
+
+.loyalty-stamp .icon {
+    width: 1rem;
+    height: 1rem;
+    color: var(--bg-brand);
+    opacity: 0;
+    transition: var(--transition-fast);
+}
+
+.loyalty-stamp.filled .icon {
+    opacity: 1;
+}
+
+.loyalty-progress {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin-bottom: 1.5rem;
+}
+
+.loyalty-progress span {
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+.loyalty-reward {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border: 1px solid var(--color-text);
+    margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.loyalty-reward .icon {
+    width: 1rem;
+    height: 1rem;
+    color: var(--color-text);
+}
+
+.loyalty-legal {
+    font-size: 0.7rem;
+    margin-top: 0.75rem;
+}
+
+.loyalty-info h3 {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+}
+
+.loyalty-info ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.loyalty-info ul li {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.5;
+}
+
+.loyalty-info ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 4px;
+    height: 4px;
+    background-color: var(--color-muted);
+}
+
+#loyalty-reset-btn {
+    font-size: 0.7rem;
+    padding: 0.5rem 1.25rem;
 }
 
 /* ============================================================
@@ -2563,6 +2970,25 @@ section {
         top: 0;
     }
 
+    /* Loyalty responsive */
+    .loyalty-section {
+        padding: 4rem 1.5rem;
+    }
+
+    .loyalty-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    /* Try-On responsive */
+    .tryon-section {
+        padding: 4rem 1.5rem;
+    }
+
+    .tryon-palette {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
     /* Location responsive */
     .location-section {
         padding: 4rem 1.5rem;
@@ -2881,6 +3307,25 @@ section {
 
     .gift-card-amount {
         font-size: 2.5rem;
+    }
+
+    /* Loyalty 480px */
+    .loyalty-section {
+        padding: 3.5rem 1.25rem;
+    }
+
+    .loyalty-stamps {
+        gap: 0.5rem;
+    }
+
+    /* Try-On 480px */
+    .tryon-section {
+        padding: 3.5rem 1.25rem;
+    }
+
+    .tryon-palette {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
     }
 
     /* Location 480px */

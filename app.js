@@ -273,11 +273,65 @@ document.addEventListener('DOMContentLoaded', () => {
     initBookingsManager();
     initPrivateEventsModal();
     initGiftCards();
+    initLoyalty();
+    initRebookNudge();
+    initTryOn();
     initMobileBookCta();
     initFooterAccordions();
     initGallery();
     initFaqAccordion();
     initScrollReveal();
+});
+
+// ==========================================================================
+// Accessibility: Focus Trap & Global Escape Handler
+// ==========================================================================
+
+function trapFocus(container) {
+    const focusable = container.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    first.focus();
+
+    function handleTab(e) {
+        if (e.key !== 'Tab') return;
+        if (e.shiftKey) {
+            if (document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            }
+        } else {
+            if (document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        }
+    }
+
+    container.addEventListener('keydown', handleTab);
+    const observer = new MutationObserver(() => {
+        if (container.getAttribute('aria-hidden') === 'true') {
+            container.removeEventListener('keydown', handleTab);
+            observer.disconnect();
+        }
+    });
+    observer.observe(container, { attributes: true, attributeFilter: ['aria-hidden'] });
+}
+
+function trapFocusOnActive(container) {
+    setTimeout(() => trapFocus(container), 50);
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.active, .mega-menu-overlay.active').forEach(el => {
+            el.classList.remove('active');
+            el.setAttribute('aria-hidden', 'true');
+        });
+    }
 });
 
 // ==========================================================================
@@ -596,6 +650,12 @@ async function handleNextStepValidation() {
             return;
         }
 
+        const depositConsent = document.getElementById('deposit-consent');
+        if (depositConsent && !depositConsent.checked) {
+            alert('Please agree to the $10 deposit to secure your appointment.');
+            return;
+        }
+
         bookingState.client.name = document.getElementById('client-name').value;
         bookingState.client.email = document.getElementById('client-email').value;
         bookingState.client.phone = document.getElementById('client-phone').value;
@@ -903,6 +963,18 @@ async function triggerBookingConfirmation() {
 
     await mockSupabase.from('appointments').insert([payload]);
 
+    // Set follow-up reminder (14 days out for gel refresh cycle)
+    const reminderDate = new Date(bookingState.date);
+    reminderDate.setDate(reminderDate.getDate() + 14);
+    const reminders = JSON.parse(localStorage.getItem('gilded_reminders') || '[]');
+    reminders.push({
+        serviceName: bookingState.service.name,
+        stylistName: bookingState.stylist.name,
+        reminderDate: reminderDate.toISOString(),
+        created: new Date().toISOString()
+    });
+    localStorage.setItem('gilded_reminders', JSON.stringify(reminders));
+
     // Mark this slot as booked in localStorage
     const bookedSlots = JSON.parse(localStorage.getItem('gilded_booked_slots') || '[]');
     const slotKey = bookingState.date.toDateString() + '|' + bookingState.time;
@@ -945,6 +1017,7 @@ async function triggerBookingConfirmation() {
     const modal = document.getElementById('receipt-modal');
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
+    trapFocusOnActive(modal);
 }
 
 function resetBookingWizard() {
@@ -988,6 +1061,7 @@ function initBookingsManager() {
         renderBookingsList();
         modal.classList.add('active');
         modal.setAttribute('aria-hidden', 'false');
+        trapFocusOnActive(modal);
     });
 
     closeBtn.addEventListener('click', () => {
@@ -1170,6 +1244,7 @@ function initPrivateEventsModal() {
             e.preventDefault();
             modal.classList.add('active');
             modal.setAttribute('aria-hidden', 'false');
+            trapFocusOnActive(modal);
         });
     });
 
@@ -1237,7 +1312,71 @@ function initGiftCards() {
 }
 
 // ==========================================================================
-// 9. Mobile Sticky Book CTA
+// 9. Loyalty Rewards Program
+// ==========================================================================
+function initLoyalty() {
+    const stampsContainer = document.getElementById('loyalty-stamps');
+    const countEl = document.getElementById('loyalty-count');
+    const rewardEl = document.getElementById('loyalty-reward');
+    const checkinBtn = document.getElementById('loyalty-checkin-btn');
+    const resetBtn = document.getElementById('loyalty-reset-btn');
+    if (!stampsContainer) return;
+
+    const STORAGE_KEY = 'gilded_loyalty_visits';
+    const MAX_VISITS = 5;
+
+    function getVisits() {
+        return parseInt(localStorage.getItem(STORAGE_KEY) || '0');
+    }
+
+    function setVisits(n) {
+        localStorage.setItem(STORAGE_KEY, n.toString());
+    }
+
+    function renderLoyalty() {
+        const visits = getVisits();
+        stampsContainer.innerHTML = '';
+        for (let i = 0; i < MAX_VISITS; i++) {
+            const stamp = document.createElement('div');
+            stamp.className = 'loyalty-stamp' + (i < visits ? ' filled' : '');
+            stamp.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg>';
+            stampsContainer.appendChild(stamp);
+        }
+        if (countEl) countEl.textContent = visits;
+        if (rewardEl) rewardEl.style.display = visits >= MAX_VISITS ? 'flex' : 'none';
+        if (checkinBtn) checkinBtn.disabled = visits >= MAX_VISITS;
+    }
+
+    if (checkinBtn) {
+        checkinBtn.addEventListener('click', () => {
+            let visits = getVisits();
+            if (visits >= MAX_VISITS) {
+                alert('You already have a reward waiting! Show this page at your next appointment to redeem.');
+                return;
+            }
+            visits++;
+            setVisits(visits);
+            renderLoyalty();
+            if (visits >= MAX_VISITS) {
+                alert('Congratulations! You\'ve earned a complimentary Gel Manicure. Show this at your next appointment.');
+            }
+        });
+    }
+
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            if (confirm('Reset your loyalty card? This cannot be undone.')) {
+                setVisits(0);
+                renderLoyalty();
+            }
+        });
+    }
+
+    renderLoyalty();
+}
+
+// ==========================================================================
+// 10. Mobile Sticky Book CTA
 // ==========================================================================
 function initMobileBookCta() {
     const cta = document.getElementById('mobile-book-cta');
@@ -1255,6 +1394,54 @@ function initMobileBookCta() {
             cta.classList.remove('hidden');
         }
     }, { passive: true });
+}
+
+// ==========================================================================
+// Virtual Try-On — palette swatch preview
+// ==========================================================================
+function initTryOn() {
+    const swatches = document.querySelectorAll('.tryon-palette-swatch');
+    const label = document.getElementById('tryon-swatch-label');
+    if (!swatches.length) return;
+
+    swatches.forEach(swatch => {
+        swatch.addEventListener('click', () => {
+            swatches.forEach(s => s.classList.remove('active'));
+            swatch.classList.add('active');
+            if (label) label.textContent = swatch.dataset.color || 'Selected';
+        });
+    });
+}
+
+// ==========================================================================
+// Rebook Nudge — post-appointment follow-up reminder
+// ==========================================================================
+function initRebookNudge() {
+    const nudge = document.getElementById('rebook-nudge');
+    const closeBtn = document.getElementById('rebook-nudge-close');
+    const textEl = document.getElementById('rebook-nudge-text');
+    if (!nudge || !textEl) return;
+
+    const reminders = JSON.parse(localStorage.getItem('gilded_reminders') || '[]');
+    const now = new Date();
+    const due = reminders.find(r => {
+        const reminderDate = new Date(r.reminderDate);
+        return reminderDate <= now;
+    });
+
+    if (due) {
+        textEl.textContent = 'Your ' + due.serviceName + ' with ' + due.stylistName + ' is due for a refresh.';
+        nudge.style.display = 'block';
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            nudge.style.display = 'none';
+            // Clear this reminder
+            const updated = reminders.filter(r => r.reminderDate !== due.reminderDate);
+            localStorage.setItem('gilded_reminders', JSON.stringify(updated));
+        });
+    }
 }
 
 // ==========================================================================
@@ -1282,7 +1469,7 @@ function initFooterAccordions() {
 }
 
 // ==========================================================================
-// 10. Gallery / Nail Art Vault
+// 11. Gallery / Nail Art Vault
 // ==========================================================================
 function initGallery() {
     const grid = document.getElementById('gallery-grid');
@@ -1375,7 +1562,7 @@ function initScrollReveal() {
     });
 
     // Also observe new sections
-    const extraTargets = document.querySelectorAll('.gallery-section, .faq-section, .location-section, .gift-cards-section');
+    const extraTargets = document.querySelectorAll('.gallery-section, .faq-section, .location-section, .gift-cards-section, .loyalty-section, .tryon-section');
     extraTargets.forEach(el => {
         el.classList.add('scroll-reveal');
         revealObserver.observe(el);

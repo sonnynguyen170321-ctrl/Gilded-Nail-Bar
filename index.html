@@ -63,6 +63,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Skip to content -->
+    <a href="#services" class="skip-nav">Skip to content</a>
+
     <!-- Custom SVG Icon Sprite (hidden) -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
         <defs>
@@ -228,7 +231,9 @@
                 <div class="mega-menu-col">
                     <span class="mega-menu-col-label">EXPERIENCE</span>
                     <a href="#gallery" class="mega-menu-link">Nail Art Vault</a>
+                    <a href="#tryon" class="mega-menu-link">Virtual Try-On</a>
                     <a href="#gift-cards" class="mega-menu-link">Gift Cards</a>
+                    <a href="#loyalty" class="mega-menu-link">Gilded Rewards</a>
                     <a href="#botanical" class="mega-menu-link">Botanical Cabinet</a>
                     <a href="#reviews" class="mega-menu-link">Guest Reviews</a>
                     <a href="#faq" class="mega-menu-link">Guidance</a>
@@ -242,7 +247,7 @@
                 </div>
             </div>
             <div class="mega-menu-visual">
-                <div class="mega-menu-image" style="background-image: url('manicure_aesthetic.png')"></div>
+                <div class="mega-menu-image" style="background-image: url('manicure_aesthetic.png')" role="img" aria-label="Gilded Nail Bar interior and nail art"></div>
                 <p class="mega-menu-tagline">Where your hands tell a story.</p>
             </div>
         </div>
@@ -254,7 +259,7 @@
     <main id="main-content">
         <!-- Horizontal Category Heros (Scroll Column) -->
         <section id="category-manicures" class="category-hero">
-            <div class="hero-bg" style="background-image: url('manicure_aesthetic.png')"></div>
+            <div class="hero-bg" style="background-image: url('manicure_aesthetic.png')" role="img" aria-label="Luxury gel manicure in progress — Gilded Nail Bar"></div>
             <div class="category-hero-overlay">
                 <div class="category-hero-content">
                     <span class="cat-number">01 / MANICURES</span>
@@ -266,7 +271,7 @@
         </section>
 
         <section id="category-pedicures" class="category-hero">
-            <div class="hero-bg" style="background-image: url('pedicure_aesthetic.png')"></div>
+            <div class="hero-bg" style="background-image: url('pedicure_aesthetic.png')" role="img" aria-label="Organic pedicure treatment at Gilded Nail Bar"></div>
             <div class="category-hero-overlay">
                 <div class="category-hero-content">
                     <span class="cat-number">02 / PEDICURES</span>
@@ -278,7 +283,7 @@
         </section>
 
         <section id="category-extensions" class="category-hero">
-            <div class="hero-bg" style="background-image: url('extensions_aesthetic.png')"></div>
+            <div class="hero-bg" style="background-image: url('extensions_aesthetic.png')" role="img" aria-label="Structured gel nail extensions by Gilded Nail Bar"></div>
             <div class="category-hero-overlay">
                 <div class="category-hero-content">
                     <span class="cat-number">03 / EXTENSIONS</span>
@@ -290,7 +295,7 @@
         </section>
 
         <section id="category-nailart" class="category-hero">
-            <div class="hero-bg" style="background-image: url('nailart_aesthetic.png')"></div>
+            <div class="hero-bg" style="background-image: url('nailart_aesthetic.png')" role="img" aria-label="Custom nail art portfolio — Gilded Nail Bar"></div>
             <div class="category-hero-overlay">
                 <div class="category-hero-content">
                     <span class="cat-number">04 / NAIL ART</span>
@@ -395,6 +400,42 @@
             </div>
         </section>
 
+        <!-- Virtual Try-On -->
+        <section id="tryon" class="tryon-section">
+            <div class="section-header">
+                <span class="section-subtitle">VIRTUAL TRY-ON</span>
+                <h2 class="section-title">PREVIEW YOUR LOOK</h2>
+                <div class="mono-line-divider"></div>
+                <p class="section-description">Explore our signature palette before your visit. Full AR try-on coming soon — download YouCam Nails for an instant preview on your own hands.</p>
+            </div>
+
+            <div class="tryon-container">
+                <div class="tryon-palette">
+                    <div class="tryon-palette-swatch" style="background-color: #d4a89a;" data-color="Blush Bloom"></div>
+                    <div class="tryon-palette-swatch" style="background-color: #c49a8c;" data-color="Dusty Rose"></div>
+                    <div class="tryon-palette-swatch" style="background-color: #a88b7a;" data-color="Warm Taupe"></div>
+                    <div class="tryon-palette-swatch" style="background-color: #8a7c71;" data-color="Stone Path"></div>
+                    <div class="tryon-palette-swatch" style="background-color: #6f6055;" data-color="Earthy Bronze"></div>
+                    <div class="tryon-palette-swatch" style="background-color: #584638;" data-color="Gilded Brown"></div>
+                    <div class="tryon-palette-swatch" style="background-color: #3d3229;" data-color="Deep Espresso"></div>
+                    <div class="tryon-palette-swatch" style="background-color: #c4a882;" data-color="Golden Sand"></div>
+                    <div class="tryon-palette-swatch" style="background-color: #d4b896;" data-color="Champagne Glow"></div>
+                    <div class="tryon-palette-swatch" style="background-color: #e8d5b8;" data-color="Cream Silk"></div>
+                    <div class="tryon-palette-swatch" style="background-color: #b8a89a;" data-color="Greige Stone"></div>
+                    <div class="tryon-palette-swatch" style="background-color: #e3c9b0;" data-color="Warm Almond"></div>
+                </div>
+                <p class="tryon-swatch-label" id="tryon-swatch-label">Tap a shade to preview</p>
+                <div class="tryon-cta">
+                    <p>Experience the full AR experience with our partner app:</p>
+                    <a href="https://www.perfectcorp.com/consumer/apps/ycn" target="_blank" rel="noopener" class="btn btn-outline">
+                        <svg class="icon" aria-hidden="true"><use href="#icon-sparkle"/></svg>
+                        TRY YOUCAM NAILS
+                    </a>
+                    <span class="tryon-coming-soon">Full in-browser AR try-on coming in a future update</span>
+                </div>
+            </div>
+        </section>
+
         <!-- FAQ Section -->
         <section id="faq" class="faq-section">
             <div class="section-header">
@@ -456,6 +497,51 @@
                     <div class="faq-answer" id="faq-answer-6" role="region">
                         <p>Yes. Digital gift cards are available in any denomination and can be emailed directly to the recipient with a personalized message. They never expire and may be applied toward any service or retail product. Contact us at info@gildednailbar.com or visit our front desk to purchase.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loyalty Program — Gilded Rewards -->
+        <section id="loyalty" class="loyalty-section">
+            <div class="section-header">
+                <span class="section-subtitle">GILDED REWARDS</span>
+                <h2 class="section-title">YOUR LOYALTY CARD</h2>
+                <div class="mono-line-divider"></div>
+                <p class="section-description">Every visit brings you closer to a complimentary service. Check in each time you visit us.</p>
+            </div>
+
+            <div class="loyalty-container">
+                <div class="loyalty-card border-card">
+                    <div class="loyalty-card-header">
+                        <svg class="icon" aria-hidden="true"><use href="#icon-sparkle"/></svg>
+                        <span class="loyalty-card-title">Gilded Rewards</span>
+                        <svg class="icon" aria-hidden="true"><use href="#icon-sparkle"/></svg>
+                    </div>
+                    <div class="loyalty-stamps" id="loyalty-stamps"></div>
+                    <div class="loyalty-progress">
+                        <span id="loyalty-count">0</span> / 5 visits
+                    </div>
+                    <div class="loyalty-reward" id="loyalty-reward" style="display:none;">
+                        <svg class="icon" aria-hidden="true"><use href="#icon-gift"/></svg>
+                        <span>You've earned a complimentary Gel Manicure!</span>
+                    </div>
+                    <button class="btn btn-outline w-100" id="loyalty-checkin-btn">
+                        <svg class="icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                        CHECK IN
+                    </button>
+                    <p class="loyalty-legal">Reward: one complimentary Gel Manicure after 5 visits. Non-transferable. No cash value.</p>
+                </div>
+
+                <div class="loyalty-info">
+                    <h3>How It Works</h3>
+                    <ul>
+                        <li><strong>Check in</strong> each time you visit — at the front desk or from this page</li>
+                        <li>Earn <strong>1 stamp per visit</strong></li>
+                        <li>After <strong>5 visits</strong>, unlock a complimentary Gel Manicure</li>
+                        <li>Redeem your reward on your next appointment</li>
+                        <li>Your rewards card is stored securely in your browser</li>
+                    </ul>
+                    <button class="btn btn-solid" id="loyalty-reset-btn">RESET CARD</button>
                 </div>
             </div>
         </section>
@@ -573,6 +659,27 @@
                                 <label for="client-notes">Special Requests (Optional)</label>
                                 <textarea id="client-notes" name="notes" placeholder="Any nail art style preference, structural requests, or details..."></textarea>
                             </div>
+
+                            <div class="deposit-section">
+                                <div class="deposit-notice">
+                                    <svg class="icon" aria-hidden="true"><use href="#icon-sparkle"/></svg>
+                                    <span>A <strong>$10 deposit</strong> is required to secure this appointment. This will be deducted from your total balance.</span>
+                                </div>
+                                <div class="deposit-card-mock" id="deposit-card-mock">
+                                    <div class="deposit-card-row">
+                                        <span class="deposit-label">Card Number</span>
+                                        <div class="deposit-dots">•••• •••• •••• ••••</div>
+                                    </div>
+                                    <div class="deposit-card-row">
+                                        <span class="deposit-label">EXP</span>
+                                        <span class="deposit-label">CVV</span>
+                                    </div>
+                                </div>
+                                <label class="deposit-checkbox">
+                                    <input type="checkbox" id="deposit-consent" required>
+                                    <span>I authorize a $10 hold to secure my booking. Refundable with 24h cancellation.</span>
+                                </label>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -620,6 +727,13 @@
                         <div class="receipt-row total-row">
                             <span>TOTAL COST:</span>
                             <strong id="receipt-price" class="price-highlight">$120.00</strong>
+                        </div>
+                        <div class="receipt-row">
+                            <span>DEPOSIT PAID:</span>
+                            <strong>$10.00</strong>
+                        </div>
+                        <div class="receipt-row" style="color: var(--color-muted); font-size: 0.75rem;">
+                            <span>Remaining balance due at visit</span>
                         </div>
                     </div>
                     
@@ -935,9 +1049,9 @@
                 <div class="footer-accordion-panel" id="footer-contact-content">
                     <div class="panel-inner">
                         <address>
-                            <p><i class="fa-solid fa-location-dot"></i> 3636 McKinney Ave, Suite 150<br>Dallas, TX 75204 (Uptown)</p>
-                            <p><i class="fa-solid fa-phone"></i> <a href="tel:+12145550145">(214) 555-0145</a></p>
-                            <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@gildednailbar.com">info@gildednailbar.com</a></p>
+                            <p><i class="fa-solid fa-location-dot" aria-hidden="true"></i> 3636 McKinney Ave, Suite 150<br>Dallas, TX 75204 (Uptown)</p>
+                            <p><i class="fa-solid fa-phone" aria-hidden="true"></i> <a href="tel:+12145550145">(214) 555-0145</a></p>
+                            <p><i class="fa-solid fa-envelope" aria-hidden="true"></i> <a href="mailto:info@gildednailbar.com">info@gildednailbar.com</a></p>
                         </address>
                     </div>
                 </div>
@@ -951,9 +1065,21 @@
     <!-- Mobile Sticky Book CTA -->
     <div class="mobile-book-cta" id="mobile-book-cta">
         <a href="#booking" class="mobile-book-btn">
-            <i class="fa-solid fa-calendar-plus"></i>
+            <svg class="icon" aria-hidden="true"><use href="#icon-calendar"/></svg>
             BOOK APPOINTMENT
         </a>
+    </div>
+
+    <!-- Rebook Nudge Banner -->
+    <div class="rebook-nudge" id="rebook-nudge" style="display:none;">
+        <div class="rebook-nudge-content">
+            <svg class="icon" aria-hidden="true"><use href="#icon-sparkle"/></svg>
+            <span id="rebook-nudge-text">Your gel manicure is due for a refresh.</span>
+            <a href="#booking" class="rebook-nudge-link">REBOOK NOW</a>
+            <button class="rebook-nudge-close" id="rebook-nudge-close" aria-label="Dismiss reminder">
+                <svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg>
+            </button>
+        </div>
     </div>
 
     <!-- Scripts -->
