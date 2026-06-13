@@ -408,24 +408,65 @@ function initCustomIcons() {
 function initSplashEntrance() {
     const splash = document.getElementById('splash-screen');
     const enterBtn = document.getElementById('enter-site-btn');
-    const locationLine = document.querySelector('.splash-location');
+    const locationLine = document.getElementById('splash-location-line');
     const logo = document.querySelector('.splash-logo');
+    const logoContainer = document.querySelector('.splash-logo-container');
 
     if (sessionStorage.getItem('gilded_entered') === 'true') {
         splash.style.display = 'none';
         return;
     }
 
+    if (logoContainer) {
+        setTimeout(() => {
+            logoContainer.classList.add('circle-reveal');
+        }, 50);
+    }
+
     if (logo) {
         setTimeout(() => {
             logo.classList.add('splash-logo--reveal');
         }, 200);
+
+        const diamond = logo.querySelector('.logo-mark-diamond');
+        if (diamond) {
+            diamond.addEventListener('click', (e) => {
+                diamond.classList.remove('sparkle');
+                void diamond.offsetWidth;
+                diamond.classList.add('sparkle');
+            });
+        }
+    }
+
+    /* Typewriter — reveal location line character by character */
+    const entranceLine = document.getElementById('splash-entrance-line');
+    if (entranceLine) {
+        setTimeout(() => {
+            entranceLine.classList.add('draw');
+        }, 1550);
     }
 
     if (locationLine) {
+        const text = locationLine.getAttribute('data-text') || '';
+        locationLine.textContent = '';
+        let idx = 0;
+        const typeInterval = 60;
+        const typePauseStart = 1800;
+
         setTimeout(() => {
-            locationLine.classList.add('draw');
-        }, 1800);
+            locationLine.classList.add('typing');
+            locationLine.classList.add('visible');
+
+            const timer = setInterval(() => {
+                if (idx < text.length) {
+                    locationLine.textContent = text.slice(0, idx + 1);
+                    idx++;
+                } else {
+                    clearInterval(timer);
+                    locationLine.classList.remove('typing');
+                }
+            }, typeInterval);
+        }, typePauseStart);
     }
 
     enterBtn.addEventListener('click', () => {
@@ -439,6 +480,29 @@ function initSplashEntrance() {
             }
         }, 300);
     });
+
+    /* Magnetic diamond — header logo diamond subtly follows cursor via CSS custom properties */
+    const logoLink = document.getElementById('logo');
+    const headerDiamond = document.querySelector('.logo-mark-header .logo-mark-diamond');
+    if (logoLink && headerDiamond) {
+        const maxMove = 5;
+
+        logoLink.addEventListener('mousemove', (e) => {
+            const rect = logoLink.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const dx = (e.clientX - cx) / (rect.width / 2) * maxMove;
+            const dy = (e.clientY - cy) / (rect.height / 2) * maxMove;
+
+            headerDiamond.style.setProperty('--mx', dx + 'px');
+            headerDiamond.style.setProperty('--my', dy + 'px');
+        });
+
+        logoLink.addEventListener('mouseleave', () => {
+            headerDiamond.style.removeProperty('--mx');
+            headerDiamond.style.removeProperty('--my');
+        });
+    }
 }
 
 // ==========================================================================
