@@ -65,7 +65,7 @@
 </head>
 <body>
     <!-- Skip to content -->
-    <a href="#services" class="skip-nav">Skip to content</a>
+    <a href="#main-content" class="skip-nav">Skip to content</a>
 
     <!-- Custom SVG Icon Sprite (hidden) -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
@@ -232,7 +232,7 @@
 
     <!-- Full-Screen Mega Menu -->
     <div class="mega-menu-overlay" id="mega-menu" aria-hidden="true" role="dialog" aria-label="Site Navigation">
-        <div class="mega-menu-container">
+        <nav class="mega-menu-container" aria-label="Main navigation">
             <div class="mega-menu-nav">
                 <div class="mega-menu-col">
                     <span class="mega-menu-col-label">SERVICES</span>
@@ -699,7 +699,7 @@
                                     </div>
                                 </div>
                                 <label class="deposit-checkbox">
-                                    <input type="checkbox" id="deposit-consent" required>
+                                    <input type="checkbox" id="deposit-consent" name="deposit-consent" required>
                                     <span>I authorize a $10 hold to secure my booking. Refundable with 24h cancellation.</span>
                                 </label>
                             </div>
@@ -817,7 +817,7 @@
                     <form id="new-review-form" class="review-form">
                         <div class="form-group">
                             <label for="review-name">Name</label>
-                            <input type="text" id="review-name" required placeholder="Elena Rostova">
+                            <input type="text" id="review-name" name="review-name" required placeholder="Elena Rostova">
                         </div>
                         <div class="form-group">
                             <label>Rating</label>
@@ -831,7 +831,7 @@
                         </div>
                         <div class="form-group">
                             <label for="review-text">Your Review</label>
-                            <textarea id="review-text" required placeholder="Describe your gilded experience..." rows="4"></textarea>
+                            <textarea id="review-text" name="review-text" required placeholder="Describe your gilded experience..." rows="4"></textarea>
                         </div>
                         <button type="submit" class="btn btn-solid w-100" id="submit-review-btn">SUBMIT REVIEW</button>
                     </form>

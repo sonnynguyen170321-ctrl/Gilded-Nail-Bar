@@ -388,8 +388,13 @@ function initCustomIcons() {
     };
 
     document.querySelectorAll('i[class*="fa-"]').forEach(el => {
-        const classStr = Array.from(el.classList).join(' ');
-        const iconId = faMap[classStr];
+        const cls = Array.from(el.classList);
+        const iconId = (() => {
+            for (const [key, id] of Object.entries(faMap)) {
+                if (key.split(' ').every(c => cls.includes(c))) return id;
+            }
+            return null;
+        })();
         if (iconId) {
             const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             svg.setAttribute('class', 'icon' + (iconId === 'icon-star-filled' ? ' icon-star-filled' : ''));
@@ -944,15 +949,32 @@ function renderTimeSlots() {
     const timeSlotsList = document.getElementById('time-slots-list');
     timeSlotsList.innerHTML = '';
 
-    const slots = ["10:00 AM", "11:15 AM", "12:30 PM", "1:45 PM", "3:00 PM", "4:15 PM", "5:30 PM", "6:45 PM"];
+    const slots = ["10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM"];
     const bookedSlots = JSON.parse(localStorage.getItem('gilded_booked_slots') || '[]');
     const today = bookingState.date ? bookingState.date.toDateString() : '';
+    const now = new Date();
+    const isToday = bookingState.date && bookingState.date.toDateString() === now.toDateString();
+
+    const slotToMinutes = (s) => {
+        const [_, h, m, ap] = s.match(/^(\d+):(\d+) (AM|PM)$/);
+        const hr = (ap === 'PM' && h !== '12' ? +h + 12 : ap === 'AM' && h === '12' ? 0 : +h);
+        return hr * 60 + +m;
+    };
+
+    const nowMinutes = now.getHours() * 60 + now.getMinutes();
     
     slots.forEach(slot => {
         const slotBtn = document.createElement('button');
         slotBtn.type = 'button';
         slotBtn.className = 'time-slot-btn';
         slotBtn.innerText = slot;
+
+        if (isToday && slotToMinutes(slot) <= nowMinutes) {
+            slotBtn.classList.add('booked');
+            slotBtn.disabled = true;
+            timeSlotsList.appendChild(slotBtn);
+            return;
+        }
 
         const slotKey = today + '|' + slot;
         const isBooked = bookedSlots.includes(slotKey);
@@ -1096,17 +1118,41 @@ async function triggerBookingConfirmation() {
     const icsBtn = document.getElementById('receipt-ics-btn');
     if (icsBtn) {
         icsBtn.onclick = () => {
-            const startTime = bookingState.time.replace(' ', '').toUpperCase();
-            const endHour = parseInt(bookingState.time) + 1;
-            const endTime = startTime.replace(/^\d+/, endHour);
+            const toPad = (n) => String(n).padStart(2, '0');
+            const toICSDate = (d) => d.toISOString().split('T')[0].replace(/-/g, '');
+            const toICSTime = (t) => {
+                const m = t.match(/^(\d+):(\d+) (AM|PM)$/);
+                if (!m) return '000000';
+                let h = +m[1];
+                if (m[3] === 'PM' && h !== 12) h += 12;
+                if (m[3] === 'AM' && h === 12) h = 0;
+                return toPad(h) + m[2] + '00';
+            };
+            const parseHour = (t) => {
+                const m = t.match(/^(\d+):(\d+) (AM|PM)$/);
+                let h = +m[1];
+                if (m[3] === 'PM' && h !== 12) h += 12;
+                if (m[3] === 'AM' && h === 12) h = 0;
+                return h;
+            };
+            const toTimeStr = (h) => {
+                const ap = h >= 12 ? 'PM' : 'AM';
+                const hour12 = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+                return hour12 + ':00 ' + ap;
+            };
+
+            const startRaw = bookingState.time;
+            const startHour = parseHour(startRaw);
+            const endHour = startHour + 1;
+            const endRaw = toTimeStr(endHour);
 
             const icsContent = [
                 'BEGIN:VCALENDAR',
                 'VERSION:2.0',
                 'PRODID:-//Gilded Nail Bar//Booking//EN',
                 'BEGIN:VEVENT',
-                'DTSTART:' + bookingState.date.toISOString().split('T')[0].replace(/-/g, '') + 'T' + startTime.replace(/:/g, '').replace(' ', ''),
-                'DTEND:' + bookingState.date.toISOString().split('T')[0].replace(/-/g, '') + 'T' + startTime.replace(/:/g, '').replace(' ', ''),
+                'DTSTART:' + toICSDate(bookingState.date) + 'T' + toICSTime(startRaw),
+                'DTEND:' + toICSDate(bookingState.date) + 'T' + toICSTime(endRaw),
                 'SUMMARY:Gilded Nail Bar - ' + bookingState.service.name,
                 'DESCRIPTION:Appointment with ' + bookingState.stylist.name + '\\nLocation: 3636 McKinney Ave, Suite 150, Dallas, TX 75204',
                 'LOCATION:3636 McKinney Ave, Suite 150, Dallas, TX 75204',
@@ -1380,6 +1426,22 @@ function initPrivateEventsModal() {
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        const data = {
+            name: document.getElementById('pe-name')?.value || '',
+            email: document.getElementById('pe-email')?.value || '',
+            phone: document.getElementById('pe-phone')?.value || '',
+            guests: document.getElementById('pe-guests')?.value || '',
+            type: document.getElementById('pe-type')?.value || '',
+            date: document.getElementById('pe-date')?.value || '',
+            notes: document.getElementById('pe-notes')?.value || '',
+            submitted: new Date().toISOString()
+        };
+
+        const existing = JSON.parse(localStorage.getItem('gilded_private_events') || '[]');
+        existing.push(data);
+        localStorage.setItem('gilded_private_events', JSON.stringify(existing));
+
         form.style.display = 'none';
         successEl.classList.add('shown');
 
@@ -1403,7 +1465,7 @@ function initGiftCards() {
 
     if (!amountBtns.length) return;
 
-    let selectedAmount = 100;
+    let selectedAmount = parseInt(document.querySelector('.gift-amount-btn.active')?.dataset.amount) || 100;
 
     amountBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -1658,7 +1720,7 @@ function renderGallery(filter) {
         if (filter !== 'all' && item.category !== filter) return;
 
         const el = document.createElement('div');
-        el.className = 'gallery-item gallery-coming-soon';
+        el.className = 'gallery-item';
         el.innerHTML = `
             <div class="gallery-item-image" style="background-image: url('${item.image}'); background-size: cover; background-position: center;"></div>
             <div class="gallery-item-overlay">
