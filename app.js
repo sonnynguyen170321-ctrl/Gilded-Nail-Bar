@@ -524,6 +524,7 @@ function initNavigation() {
         megaMenu.classList.add('active');
         megaMenu.setAttribute('aria-hidden', 'false');
         mobileToggle.setAttribute('aria-expanded', 'true');
+        megaMenuBtn.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
     }
 
@@ -531,6 +532,7 @@ function initNavigation() {
         megaMenu.classList.remove('active');
         megaMenu.setAttribute('aria-hidden', 'true');
         mobileToggle.setAttribute('aria-expanded', 'false');
+        megaMenuBtn.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
     }
 
@@ -693,6 +695,9 @@ function navigateToBookingStep(targetStep) {
     document.getElementById(`booking-panel-${bookingState.step}`).classList.remove('active');
     bookingState.step = targetStep;
     document.getElementById(`booking-panel-${bookingState.step}`).classList.add('active');
+
+    const progressBar = document.getElementById('booking-progress-bar');
+    if (progressBar) progressBar.setAttribute('aria-valuenow', bookingState.step);
 
     document.querySelectorAll('.booking-steps-bar .step').forEach((stepEl, idx) => {
         const stepNum = idx + 1;

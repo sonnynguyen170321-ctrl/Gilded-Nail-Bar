@@ -1713,68 +1713,6 @@ section {
 }
 
 /* Rebook Nudge Banner */
-.rebook-nudge {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 9000;
-    background-color: var(--color-text);
-    color: var(--bg-brand);
-    padding: 0.75rem 1.5rem;
-    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.rebook-nudge-content {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-}
-
-.rebook-nudge-content .icon {
-    width: 1rem;
-    height: 1rem;
-    color: var(--bg-brand);
-    flex-shrink: 0;
-}
-
-.rebook-nudge-text {
-    flex: 1;
-}
-
-.rebook-nudge-link {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    color: var(--bg-brand);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-
-.rebook-nudge-link:hover {
-    opacity: 0.8;
-}
-
-.rebook-nudge-close {
-    background: none;
-    border: none;
-    color: var(--bg-brand);
-    cursor: pointer;
-    padding: 0.25rem;
-    flex-shrink: 0;
-}
-
-.rebook-nudge-close .icon {
-    width: 0.85rem;
-    height: 0.85rem;
-}
-
 /* ============================================================
    Toast Notification System
    ============================================================ */
@@ -2093,15 +2031,6 @@ section {
     color: var(--color-muted);
     letter-spacing: 0.05em;
     margin-bottom: 1.5rem;
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(100%);
-    }
-    to {
-        transform: translateY(0);
-    }
 }
 
 .booking-helper-links {
@@ -4192,5 +4121,17 @@ section {
     /* Extra body padding for sticky CTA on small phones */
     body {
         padding-bottom: 90px;
+    }
+}
+
+/* ============================================================
+   Accessibility — Reduced Motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
